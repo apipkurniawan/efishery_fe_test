@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import moment from "moment";
 
 // import CartContext from '../../../store/cart-context';
 import "./FishItem.scss";
@@ -37,7 +38,7 @@ const FishItem: React.FC<{
       </div>
       <div>
         <div className="right-column">
-          <label>{props.date}</label>
+          <label>{moment(props.date).format("ddd, D MMMM YYYY")}</label>
           <br />
           <div className="btn-container">
             <button>Edit</button>
