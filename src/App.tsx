@@ -2,6 +2,7 @@ import FishContextProvider from "./store/fish-context";
 import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
+import { BackTop } from "antd";
 
 function App() {
   // // var numArray = [
@@ -90,6 +91,10 @@ function App() {
   //   setSelectedRadioBtn(event.target.value);
   // };
 
+  const backtop = {
+    marginRight: "-6%",
+  };
+
   return (
     // <>
     //   <div>
@@ -136,6 +141,7 @@ function App() {
         <FishThumbnail />
         <Fishes />
       </main>
+      <BackTop style={backtop} />
     </FishContextProvider>
   );
 }
