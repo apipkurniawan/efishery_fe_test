@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import moment from "moment";
 import CurrencyFormat from "../../utils/currency-format";
 import "./FishItem.scss";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { FishContext } from "../../store/fish-context";
 
 const FishItem: React.FC<{
@@ -30,11 +31,11 @@ const FishItem: React.FC<{
           <label>{moment(props.date).format("ddd, D MMMM YYYY")}</label>
           <br />
           <div className="btn-container">
-            <button>Edit</button>
+            <button>{<EditFilled />}</button>
             {/* <button onClick={fishCtx.removeFish.bind(null, props.id)}>
               Delete
             </button> */}
-            <button onClick={props.onShowConfirm}>Delete</button>
+            <button onClick={props.onShowConfirm}>{<DeleteFilled />}</button>
           </div>
         </div>
       </div>

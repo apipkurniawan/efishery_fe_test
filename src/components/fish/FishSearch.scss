@@ -4,7 +4,7 @@ input {
   padding: 0.35rem 0.35rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  width: 20rem;
+  width: 30rem;
 }
 
 input:focus {
@@ -14,5 +14,6 @@ input:focus {
 }
 
 .search-container {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
