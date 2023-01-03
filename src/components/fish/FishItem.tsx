@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 
-import FishItemForm from "./FishItemForm";
 // import CartContext from '../../../store/cart-context';
 import "./FishItem.scss";
 
 const FishItem: React.FC<{
   name: string;
-  description: string;
+  prov: string;
+  city: string;
+  time: string;
+  date: string;
   id: string;
   price: string;
   //   addToCartHandler: () => void;
@@ -28,11 +30,20 @@ const FishItem: React.FC<{
     <li className="fish">
       <div>
         <h3>{props.name}</h3>
-        <div className="description">{props.description}</div>
+        <div className="description">
+          {props.city}, {props.prov}
+        </div>
         <div className="price">{props.price}</div>
       </div>
       <div>
-        <FishItemForm id={props.id} onAddToCart={addToCartHandler} />
+        <div className="right-column">
+          <label>{props.date}</label>
+          <br />
+          <div className="btn-container">
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
+        </div>
       </div>
     </li>
   );

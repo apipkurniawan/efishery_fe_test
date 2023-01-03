@@ -31,7 +31,10 @@ const Fishes = () => {
       key={item.uuid}
       id={item.uuid}
       name={item.komoditas}
-      description={item.area_provinsi}
+      prov={item.area_provinsi}
+      city={item.area_kota}
+      time={item.timestamp}
+      date={item.tgl_parsed}
       price={item.price}
     />
   ));
