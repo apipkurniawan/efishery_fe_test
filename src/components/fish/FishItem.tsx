@@ -3,6 +3,7 @@ import moment from "moment";
 
 // import CartContext from '../../../store/cart-context';
 import "./FishItem.scss";
+import CurrencyFormat from "../../utils/currency-format";
 
 const FishItem: React.FC<{
   name: string;
@@ -34,7 +35,7 @@ const FishItem: React.FC<{
         <div className="description">
           {props.city}, {props.prov}
         </div>
-        <div className="price">{props.price}</div>
+        <div className="price">{CurrencyFormat(parseFloat(props.price))}</div>
       </div>
       <div>
         <div className="right-column">
