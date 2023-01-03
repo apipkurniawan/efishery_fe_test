@@ -1,0 +1,18 @@
+input {
+  flex: 3;
+  font: inherit;
+  padding: 0.35rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #f6dbfc;
+  background: #f6dbfc;
+}
+
+.search-container {
+  text-align: center;
+}

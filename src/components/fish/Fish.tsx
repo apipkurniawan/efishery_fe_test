@@ -3,6 +3,7 @@ import { FishContext } from "../../store/fish-context";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
 import "./Fish.scss";
+import FishSearch from "./FishSearch";
 
 const Fishes = () => {
   const fishCtx = useContext(FishContext);
@@ -26,6 +27,8 @@ const Fishes = () => {
 
   return (
     <section className="fishes">
+      <FishSearch />
+      <br />
       <Card>
         <ul>{fishesList}</ul>
       </Card>
