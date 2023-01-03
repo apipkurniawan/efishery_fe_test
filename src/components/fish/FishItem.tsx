@@ -14,6 +14,7 @@ const FishItem: React.FC<{
   id: string;
   price: string;
   onShowConfirm: () => void;
+  onShowForm: () => void;
 }> = (props) => {
   // const fishCtx = useContext(FishContext);
 
@@ -31,7 +32,7 @@ const FishItem: React.FC<{
           <label>{moment(props.date).format("ddd, D MMMM YYYY")}</label>
           <br />
           <div className="btn-container">
-            <button>{<EditFilled />}</button>
+            <button onClick={props.onShowForm}>{<EditFilled />}</button>
             {/* <button onClick={fishCtx.removeFish.bind(null, props.id)}>
               Delete
             </button> */}

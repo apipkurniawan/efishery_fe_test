@@ -3,12 +3,13 @@ import { FishContext } from "../../store/fish-context";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
 import FishSearch from "./FishSearch";
-import Modal from "../UI/Modal";
-import "./Fish.scss";
 import ConfirmDialog from "../UI/ConfirmDialog";
+import FishForm from "./FishForm";
+import "./Fish.scss";
 
 const Fishes = () => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
+  const [formIsShown, setFormIsShown] = useState(false);
 
   const showConfirmHandler = () => {
     setConfirmIsShown(true);
@@ -16,6 +17,14 @@ const Fishes = () => {
 
   const hideConfirmHandler = () => {
     setConfirmIsShown(false);
+  };
+
+  const showFormHandler = () => {
+    setFormIsShown(true);
+  };
+
+  const hideFormHandler = () => {
+    setFormIsShown(false);
   };
   const fishCtx = useContext(FishContext);
 
@@ -35,6 +44,7 @@ const Fishes = () => {
       date={item.tgl_parsed}
       price={item.price}
       onShowConfirm={showConfirmHandler}
+      onShowForm={showFormHandler}
     />
   ));
 
@@ -46,6 +56,7 @@ const Fishes = () => {
           onClose={hideConfirmHandler}
         />
       )}
+      {formIsShown && <FishForm onClose={hideFormHandler} />}
       <FishSearch />
       <br />
       <Card>
