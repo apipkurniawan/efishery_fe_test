@@ -9,8 +9,9 @@ const Fishes = () => {
   const fishCtx = useContext(FishContext);
 
   useEffect(() => {
+    console.log("useEffect get fish!");
     fishCtx.getFish();
-  }, [fishCtx]);
+  }, []);
 
   const fishesList = fishCtx.items.map((item) => (
     <FishItem

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import CurrencyFormat from "../../utils/currency-format";
 import "./FishItem.scss";
-// import { FishContext } from "../../store/fish-context";
+import { FishContext } from "../../store/fish-context";
 
 const FishItem: React.FC<{
   name: string;
@@ -13,10 +13,7 @@ const FishItem: React.FC<{
   id: string;
   price: string;
 }> = (props) => {
-  // const fishCtx = useContext(FishContext);
-
-  // const deleteFishHandler = (id: string) => {};
-  // const updateFishHandler = (id: string) => {};
+  const fishCtx = useContext(FishContext);
 
   return (
     <li className="fish">
@@ -33,7 +30,9 @@ const FishItem: React.FC<{
           <br />
           <div className="btn-container">
             <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={fishCtx.removeFish.bind(null, props.id)}>
+              Delete
+            </button>
           </div>
         </div>
       </div>
