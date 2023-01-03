@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { FishContext } from "../../store/fish-context";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
-import "./Fish.scss";
 import FishSearch from "./FishSearch";
-import ConfirmModal from "../layout/ConfirmModal";
+import Modal from "../UI/Modal";
+import "./Fish.scss";
 
 const Fishes = () => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
@@ -39,7 +39,17 @@ const Fishes = () => {
 
   return (
     <section className="fishes">
-      {confirmIsShown && <ConfirmModal onClose={hideConfirmHandler} />}
+      {confirmIsShown && (
+        <Modal onClose={hideConfirmHandler}>
+          <h3 className="title">Yakin ingin hapus data?</h3>
+          <div className="actions">
+            <button className="button">Yes</button>
+            <button className="button--alt" onClick={hideConfirmHandler}>
+              No
+            </button>
+          </div>
+        </Modal>
+      )}
       <FishSearch />
       <br />
       <Card>
