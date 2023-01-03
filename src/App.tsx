@@ -1,9 +1,7 @@
 import FishContextProvider from "./store/fish-context";
 import Fishes from "./components/fish/Fish";
-import "./App.scss";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
-import FishSearch from "./components/fish/FishSearch";
 
 function App() {
   // // var numArray = [

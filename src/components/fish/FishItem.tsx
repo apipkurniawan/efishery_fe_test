@@ -12,8 +12,9 @@ const FishItem: React.FC<{
   date: string;
   id: string;
   price: string;
+  onShowConfirm: () => void;
 }> = (props) => {
-  const fishCtx = useContext(FishContext);
+  // const fishCtx = useContext(FishContext);
 
   return (
     <li className="fish">
@@ -30,9 +31,10 @@ const FishItem: React.FC<{
           <br />
           <div className="btn-container">
             <button>Edit</button>
-            <button onClick={fishCtx.removeFish.bind(null, props.id)}>
+            {/* <button onClick={fishCtx.removeFish.bind(null, props.id)}>
               Delete
-            </button>
+            </button> */}
+            <button onClick={props.onShowConfirm}>Delete</button>
           </div>
         </div>
       </div>

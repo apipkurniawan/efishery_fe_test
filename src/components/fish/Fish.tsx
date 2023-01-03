@@ -1,11 +1,21 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FishContext } from "../../store/fish-context";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
 import "./Fish.scss";
 import FishSearch from "./FishSearch";
+import ConfirmModal from "../layout/ConfirmModal";
 
 const Fishes = () => {
+  const [confirmIsShown, setConfirmIsShown] = useState(false);
+
+  const showConfirmHandler = () => {
+    setConfirmIsShown(true);
+  };
+
+  const hideConfirmHandler = () => {
+    setConfirmIsShown(false);
+  };
   const fishCtx = useContext(FishContext);
 
   useEffect(() => {
@@ -23,11 +33,13 @@ const Fishes = () => {
       time={item.timestamp}
       date={item.tgl_parsed}
       price={item.price}
+      onShowConfirm={showConfirmHandler}
     />
   ));
 
   return (
     <section className="fishes">
+      {confirmIsShown && <ConfirmModal onClose={hideConfirmHandler} />}
       <FishSearch />
       <br />
       <Card>
