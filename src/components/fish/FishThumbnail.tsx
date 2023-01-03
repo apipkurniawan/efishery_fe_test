@@ -1,8 +1,8 @@
-import "./FishSearch.scss";
+import "./FishThumbnail.scss";
 
-const FishSearch = () => {
+const FishThumbnail = () => {
   return (
-    <section className="search">
+    <section className="thumb">
       <h2>Beri Makan Ikan untuk Dunia</h2>
       <p>
         Pandemi menyebabkan dampak berkepanjangan pada ketahanan pangan global.
@@ -21,4 +21,4 @@ const FishSearch = () => {
   );
 };
 
-export default FishSearch;
+export default FishThumbnail;
