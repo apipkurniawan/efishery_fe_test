@@ -5,6 +5,7 @@ import FishItem from "./FishItem";
 import FishSearch from "./FishSearch";
 import Modal from "../UI/Modal";
 import "./Fish.scss";
+import ConfirmDialog from "../UI/ConfirmDialog";
 
 const Fishes = () => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
@@ -40,15 +41,10 @@ const Fishes = () => {
   return (
     <section className="fishes">
       {confirmIsShown && (
-        <Modal onClose={hideConfirmHandler}>
-          <h3 className="title">Yakin ingin hapus data?</h3>
-          <div className="actions">
-            <button className="button">Yes</button>
-            <button className="button--alt" onClick={hideConfirmHandler}>
-              No
-            </button>
-          </div>
-        </Modal>
+        <ConfirmDialog
+          message="Yakin ingin hapus data?"
+          onClose={hideConfirmHandler}
+        />
       )}
       <FishSearch />
       <br />
