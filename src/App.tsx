@@ -1,6 +1,8 @@
 import FishContextProvider from "./store/fish-context";
 import Fishes from "./components/fish/Fish";
 import "./App.scss";
+import FishSearch from "./components/fish/FishSearch";
+import Header from "./components/layout/Header";
 
 function App() {
   // // var numArray = [
@@ -130,7 +132,11 @@ function App() {
     //   </div>
     // </>
     <FishContextProvider>
-      <Fishes />
+      <Header />
+      <main>
+        <FishSearch />
+        <Fishes />
+      </main>
     </FishContextProvider>
   );
 }
