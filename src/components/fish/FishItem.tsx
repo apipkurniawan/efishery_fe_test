@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import moment from "moment";
-
-// import CartContext from '../../../store/cart-context';
-import "./FishItem.scss";
 import CurrencyFormat from "../../utils/currency-format";
+import "./FishItem.scss";
+// import { FishContext } from "../../store/fish-context";
 
 const FishItem: React.FC<{
   name: string;
@@ -13,20 +12,11 @@ const FishItem: React.FC<{
   date: string;
   id: string;
   price: string;
-  //   addToCartHandler: () => void;
 }> = (props) => {
-  //   const cartCtx = useContext(CartContext);
+  // const fishCtx = useContext(FishContext);
 
-  //   const price = `$${props.price.toFixed(2)}`;
-
-  const addToCartHandler = (amount: number) => {
-    //   cartCtx.addItem({
-    //     id: props.id,
-    //     name: props.name,
-    //     amount: amount,
-    //     price: props.price
-    //   });
-  };
+  // const deleteFishHandler = (id: string) => {};
+  // const updateFishHandler = (id: string) => {};
 
   return (
     <li className="fish">

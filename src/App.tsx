@@ -1,22 +1,8 @@
-// import React, { useCallback, useEffect, useState } from "react";
-// import SteinStore from "stein-js-client";
-
-// import FishModel from "./models/fish";
-import "./App.scss";
-// import { BASE_API_URL } from "./config/base-url";
-// import Card from "./components/UI/Card";
-import Fishes from "./components/fish/Fish";
 import FishContextProvider from "./store/fish-context";
+import Fishes from "./components/fish/Fish";
+import "./App.scss";
 
 function App() {
-  // const [listFishDefault, setListFishDefault] = useState<FishModel[]>([]);
-  // const [listFish, setListFish] = useState<FishModel[]>([]);
-  // const [enteredSearch, setEnteredSearch] = useState<string>("");
-  // const [selected, setSelected] = useState("");
-  // const [selectedRadioBtn, setSelectedRadioBtn] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState("");
-
   // // var numArray = [
   // //   { item: "500", prov: "jabar" },
   // //   { item: "1500", prov: "jakarta" },
@@ -34,30 +20,6 @@ function App() {
   // // });
 
   // // console.log(numArray);
-
-  // const fetchListFishHandler = useCallback(async () => {
-  //   setIsLoading(true);
-  //   setError("");
-  //   const store = new SteinStore(BASE_API_URL);
-
-  //   store.read("list").then(
-  //     (data: FishModel[]) => {
-  //       if (!data) {
-  //         setError("Found no Fish!");
-  //       } else {
-  //         setListFish(data);
-  //         setListFishDefault(data);
-  //       }
-  //       setIsLoading(false);
-  //     },
-  //     (error: any) => {}
-  //   );
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("get data from service");
-  //   fetchListFishHandler();
-  // }, [fetchListFishHandler]);
 
   // useEffect(() => {
   //   const identifier = setTimeout(() => {
@@ -166,23 +128,6 @@ function App() {
     //       onChange={searchChangeHandler}
     //     />
     //   </div>
-    //   <div className="App">List Harga Ikan</div>
-    //   {!isLoading &&
-    //     listFish &&
-    //     listFish.length > 0 &&
-    //     listFish.map((item: FishModel) => (
-    //       <ul>
-    //         <li>{item.price}</li>
-    //         <li>{item.komoditas}</li>
-    //         <li>{item.area_kota}</li>
-    //         <li>{item.area_provinsi}</li>
-    //         <li>{item.size}</li>
-    //         <li>{item.tgl_parsed}</li>
-    //         <li>{item.timestamp}</li>
-    //       </ul>
-    //     ))}
-    //   {isLoading && <p>Loading ...</p>}
-    //   {!isLoading && error && <p>{error}</p>}
     // </>
     <FishContextProvider>
       <Fishes />

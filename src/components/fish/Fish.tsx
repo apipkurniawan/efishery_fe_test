@@ -1,8 +1,8 @@
+import { useContext, useEffect } from "react";
+import { FishContext } from "../../store/fish-context";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
 import "./Fish.scss";
-import { useContext, useEffect } from "react";
-import { FishContext } from "../../store/fish-context";
 
 const Fishes = () => {
   const fishCtx = useContext(FishContext);
