@@ -33,6 +33,9 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
   const submitHandler = (e: any) => {
     e.preventDefault();
     let data = new FishModel(
+      props.selectedData
+        ? props.selectedData.uuid
+        : `${new Date().getTime().toString()}${Math.random()}`,
       enteredKomoditas,
       enteredProv,
       enteredCity,
@@ -41,7 +44,11 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
       new Date().toISOString(),
       new Date().getTime().toString()
     );
-    fishCtx.saveFishes(data);
+    if (!props.selectedData) {
+      fishCtx.saveFishes(data);
+    } else {
+      fishCtx.editFishes(data);
+    }
     props.onClose();
   };
 

@@ -15,6 +15,7 @@ type FishObj = {
   addFishes: (fishes: FishModel[]) => void;
   addAreas: (areas: Area[]) => void;
   saveFishes: (fishes: FishModel) => void;
+  editFishes: (fishes: FishModel) => void;
 };
 
 export const FishContext = React.createContext<FishObj>({
@@ -25,6 +26,7 @@ export const FishContext = React.createContext<FishObj>({
   addFishes: (fishes: FishModel[]) => {},
   addAreas: (areas: Area[]) => {},
   saveFishes: (fishes: FishModel) => {},
+  editFishes: (fishes: FishModel) => {},
 });
 
 type Props = {
@@ -75,6 +77,23 @@ const FishContextProvider = (props: Props) => {
     );
   };
 
+  const editFishesHandler = (fishesParam: FishModel) => {
+    const store = new SteinStore(BASE_API_URL);
+    store
+      .edit("list", {
+        search: { uuid: fishesParam.uuid },
+        set: fishesParam,
+      })
+      .then(
+        (data: any) => {
+          console.log("UPDATE FISH : ", data);
+        },
+        (error: Error) => {
+          console.log("ERROR : ", error);
+        }
+      );
+  };
+
   const contextValue: FishObj = {
     sizes: sizes,
     fishes: fishes,
@@ -83,6 +102,7 @@ const FishContextProvider = (props: Props) => {
     addFishes: addFishes,
     addAreas: addAreas,
     saveFishes: saveFishesHandler,
+    editFishes: editFishesHandler,
   };
 
   return (

@@ -9,6 +9,7 @@ class FishModel {
   timestamp: string;
 
   constructor(
+    uuid: string,
     komoditas: string,
     prov: string,
     city: string,
@@ -17,7 +18,7 @@ class FishModel {
     date: string,
     timestamp: string
   ) {
-    this.uuid = `${new Date().getTime().toString()}${Math.random()}`;
+    this.uuid = uuid;
     this.komoditas = komoditas;
     this.area_provinsi = prov;
     this.area_kota = city;
