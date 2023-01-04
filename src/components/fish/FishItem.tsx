@@ -14,7 +14,7 @@ const FishItem: React.FC<{
   date: string;
   id: string;
   price: string;
-  onShowConfirm: () => void;
+  onShowConfirm: (id: string) => void;
   onShowForm: () => void;
 }> = (props) => {
   // const fishCtx = useContext(FishContext);
@@ -37,7 +37,9 @@ const FishItem: React.FC<{
             {/* <button onClick={fishCtx.removeFish.bind(null, props.id)}>
               Delete
             </button> */}
-            <Button onClick={props.onShowConfirm}>{<DeleteFilled />}</Button>
+            <Button onClick={props.onShowConfirm.bind(null, props.id)}>
+              {<DeleteFilled />}
+            </Button>
           </div>
         </div>
       </div>
