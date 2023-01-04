@@ -1,5 +1,9 @@
 import Card from "../UI/Card";
-import { PlusCircleFilled } from "@ant-design/icons";
+import {
+  PlusCircleFilled,
+  SortAscendingOutlined,
+  SortDescendingOutlined,
+} from "@ant-design/icons";
 import "./FishSearch.scss";
 import { Fragment, useState } from "react";
 import FishForm from "./FishForm";
@@ -33,6 +37,8 @@ const FishSearch = () => {
               style={margin}
               placeholder="FilterBy ..."
             />
+            <button>{<SortAscendingOutlined />}</button>
+            <button style={margin}>{<SortDescendingOutlined />}</button>
             <input type="text" placeholder="search ..." />
           </div>
           <div>
