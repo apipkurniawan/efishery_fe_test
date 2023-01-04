@@ -2,7 +2,7 @@ import React from "react";
 import "./Dropdown.scss";
 
 const Dropdown: React.FC<{
-  style: any;
+  style?: any;
   placeholder: string;
   name: string;
   value: string[];
