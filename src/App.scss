@@ -1,0 +1,11 @@
+.backtop {
+  margin-right: -6%;
+  background-color: #383838;
+  border-radius: 20px;
+}
+
+@media (max-width: 600px) {
+  .backtop {
+    margin-right: -2%;
+  }
+}

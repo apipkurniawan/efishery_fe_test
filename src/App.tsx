@@ -3,6 +3,7 @@ import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
 import { BackTop } from "antd";
+import "./App.scss";
 
 function App() {
   // // var numArray = [
@@ -91,12 +92,6 @@ function App() {
   //   setSelectedRadioBtn(event.target.value);
   // };
 
-  const backtop = {
-    marginRight: "-6%",
-    backgroundColor: "#383838",
-    borderRadius: "20px",
-  };
-
   return (
     // <>
     //   <div>
@@ -143,7 +138,7 @@ function App() {
         <FishThumbnail />
         <Fishes />
       </main>
-      <BackTop style={backtop} />
+      <BackTop className="backtop" />
     </FishContextProvider>
   );
 }

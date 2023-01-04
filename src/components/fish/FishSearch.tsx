@@ -35,7 +35,7 @@ const FishSearch = () => {
       {formIsShown && <FishForm onClose={hideFormHandler} />}
       <Card>
         <div className="search-container">
-          <div>
+          <div className="filter">
             <Dropdown
               name="fish"
               value={listDropdown}
@@ -43,12 +43,12 @@ const FishSearch = () => {
               placeholder="FilterBy ..."
             />
             <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
-            <Button onClick={descHandler} style={margin}>
-              {<SortDescendingOutlined />}
-            </Button>
+            <Button onClick={descHandler}>{<SortDescendingOutlined />}</Button>
+          </div>
+          <div className="search">
             <input type="text" placeholder="search ..." />
           </div>
-          <div>
+          <div className="btnAdd">
             <Button onClick={showFormHandler}>
               {<PlusCircleFilled />} Add
             </Button>
