@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import mealsImage from "../../assets/meals.jpg";
+import foodImage from "../../assets/food.jpg";
 import "./Header.scss";
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
         <h1>Fish Farmer</h1>
       </header>
       <div className="main-image">
-        <img src={mealsImage} alt="A table full of delicious food!" />
+        <img src={foodImage} alt="A table full of delicious food!" />
       </div>
     </Fragment>
   );
