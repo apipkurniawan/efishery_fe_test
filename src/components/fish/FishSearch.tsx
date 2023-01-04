@@ -32,31 +32,35 @@ const FishSearch = () => {
   const listDropdown = ["komoditas", "price", "city", "prov"];
 
   return (
-    <Fragment>
+    <>
       {formIsShown && <FishForm onClose={hideFormHandler} />}
-      <Card>
-        <div className="search-container">
-          <div className="filter">
-            <Dropdown
-              name="fish"
-              value={listDropdown}
-              style={styleDropdown}
-              placeholder="FilterBy ..."
-            />
-            <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
-            <Button onClick={descHandler}>{<SortDescendingOutlined />}</Button>
+      <div className="search">
+        <Card>
+          <div className="search-container">
+            <div className="filter">
+              <Dropdown
+                name="fish"
+                value={listDropdown}
+                style={styleDropdown}
+                placeholder="FilterBy ..."
+              />
+              <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
+              <Button onClick={descHandler}>
+                {<SortDescendingOutlined />}
+              </Button>
+            </div>
+            <div className="search-input">
+              <input type="text" placeholder="search ..." />
+            </div>
+            <div className="btnAdd">
+              <Button onClick={showFormHandler}>
+                {<PlusCircleFilled />} Add
+              </Button>
+            </div>
           </div>
-          <div className="search">
-            <input type="text" placeholder="search ..." />
-          </div>
-          <div className="btnAdd">
-            <Button onClick={showFormHandler}>
-              {<PlusCircleFilled />} Add
-            </Button>
-          </div>
-        </div>
-      </Card>
-    </Fragment>
+        </Card>
+      </div>
+    </>
   );
 };
 

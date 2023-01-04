@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { FishContext } from "../../store/fish-context";
+import { useState } from "react";
 import Card from "../UI/Card";
 import FishItem from "./FishItem";
-import FishSearch from "./FishSearch";
 import ConfirmDialog from "../UI/ConfirmDialog";
 import FishForm from "./FishForm";
 import "./Fish.scss";
+import FishModel from "../../models/fish";
 
-const Fishes = () => {
+const Fishes: React.FC<{ items: FishModel[] }> = (props) => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
   const [formIsShown, setFormIsShown] = useState(false);
 
@@ -26,14 +25,8 @@ const Fishes = () => {
   const hideFormHandler = () => {
     setFormIsShown(false);
   };
-  const fishCtx = useContext(FishContext);
 
-  useEffect(() => {
-    console.log("useEffect get fish!");
-    fishCtx.getFish();
-  }, []);
-
-  const fishesList = fishCtx.items.map((item) => (
+  const fishesList = props.items.map((item) => (
     <FishItem
       key={item.uuid}
       id={item.uuid}
@@ -57,8 +50,6 @@ const Fishes = () => {
         />
       )}
       {formIsShown && <FishForm onClose={hideFormHandler} />}
-      <FishSearch />
-      <br />
       <Card>
         <ul>{fishesList}</ul>
       </Card>

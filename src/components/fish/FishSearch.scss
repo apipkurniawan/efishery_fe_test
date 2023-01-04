@@ -1,3 +1,10 @@
+.search {
+  max-width: 60rem;
+  width: 90%;
+  margin: 2rem auto;
+  animation: fishes-appear 1s ease-out forwards;
+}
+
 input {
   flex: 3;
   font: inherit;
@@ -31,7 +38,19 @@ input:focus {
   }
 
   .filter,
-  .search {
+  .search-input {
     margin-bottom: 0.5rem;
+  }
+}
+
+@keyframes fishes-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
