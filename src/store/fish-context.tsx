@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "../config/base-url";
 import FishModel from "../models/fish";
-import { FilterList } from "../utils/filter-list";
+import { FilterFish } from "../utils/filter-list";
 
 type FishObj = {
   items: FishModel[];
@@ -31,7 +31,7 @@ const FishContextProvider = (props: Props) => {
     store.read("list").then(
       (data: FishModel[]) => {
         console.log("get", data);
-        setFishes(FilterList(data));
+        setFishes(FilterFish(data));
       },
       (error: any) => {}
     );

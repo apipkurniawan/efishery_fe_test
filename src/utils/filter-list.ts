@@ -1,6 +1,8 @@
+import { Area } from "../models/area";
 import FishModel from "../models/fish";
+import { Size } from "../models/size";
 
-export const FilterList = (list: FishModel[]) =>
+export const FilterFish = (list: FishModel[]) =>
   list.filter(
     (fish: FishModel) =>
       fish.uuid &&
@@ -13,3 +15,9 @@ export const FilterList = (list: FishModel[]) =>
       fish.timestamp &&
       fish.price
   );
+
+export const FilterArea = (list: Area[]) =>
+  list.filter((area: Area) => area.city && area.province);
+
+export const FilterSize = (list: Size[]) =>
+  list.filter((size: Size) => size.size);

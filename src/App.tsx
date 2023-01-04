@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { BackTop } from "antd";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "./config/base-url";
-import { FilterList } from "./utils/filter-list";
+import { FilterArea, FilterFish, FilterSize } from "./utils/filter-list";
 import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
@@ -23,7 +23,7 @@ function App() {
     store.read("list").then(
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
-        setFishes(FilterList(data));
+        setFishes(FilterFish(data));
         setLoading(false);
       },
       (error: Error) => {
@@ -35,8 +35,8 @@ function App() {
 
   const getAreaHandler = () => {
     store.read("option_area").then(
-      (data: Area) => {
-        console.log("GET AREA : ", data);
+      (data: Area[]) => {
+        console.log("GET AREA : ", FilterArea(data));
       },
       (error: Error) => {
         console.log("ERROR : ", error);
@@ -46,8 +46,8 @@ function App() {
 
   const getSizeHandler = () => {
     store.read("option_size").then(
-      (data: Size) => {
-        console.log("GET SIZE : ", data);
+      (data: Size[]) => {
+        console.log("GET SIZE : ", FilterSize(data));
       },
       (error: Error) => {
         console.log("ERROR : ", error);
