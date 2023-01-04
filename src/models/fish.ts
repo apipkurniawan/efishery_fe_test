@@ -17,7 +17,7 @@ class FishModel {
     date: string,
     timestamp: string
   ) {
-    this.uuid = `${new Date().toISOString()}${Math.random()}`;
+    this.uuid = `${new Date().getTime().toString()}${Math.random()}`;
     this.komoditas = komoditas;
     this.area_provinsi = prov;
     this.area_kota = city;
