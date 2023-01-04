@@ -26,21 +26,21 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <input type="text" id="komoditas" />
         </div>
         <div className={`control ${false ? "invalid" : ""}`}>
+          <label htmlFor="prov">Provinsi</label>
+          <Dropdown
+            style={widthDropdown}
+            name="prov"
+            value={fishCtx.areas}
+            placeholder="Choose prov ..."
+          />
+        </div>
+        <div className={`control ${false ? "invalid" : ""}`}>
           <label htmlFor="city">City</label>
           <Dropdown
             name="city"
             style={widthDropdown}
             value={list}
             placeholder="Choose city ..."
-          />
-        </div>
-        <div className={`control ${false ? "invalid" : ""}`}>
-          <label htmlFor="prov">Provinsi</label>
-          <Dropdown
-            style={widthDropdown}
-            name="prov"
-            value={list}
-            placeholder="Choose prov ..."
           />
         </div>
         <div className={`control ${false ? "invalid" : ""}`}>

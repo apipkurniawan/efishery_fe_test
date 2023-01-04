@@ -3,11 +3,12 @@ import { Area } from "../models/area";
 import FishModel from "../models/fish";
 import { Select } from "../models/select";
 import { Size } from "../models/size";
+import _ from "lodash";
 
 type FishObj = {
   sizes: Select[];
   fishes: FishModel[];
-  areas: Area[];
+  areas: Select[];
   addSizes: (sizes: Size[]) => void;
   addFishes: (fishes: FishModel[]) => void;
   addAreas: (areas: Area[]) => void;
@@ -29,18 +30,30 @@ type Props = {
 const FishContextProvider = (props: Props) => {
   const [sizes, setSizes] = useState<Select[]>([]);
   const [fishes, setFishes] = useState<FishModel[]>([]);
-  const [areas, setAreas] = useState<Area[]>([]);
+  const [areas, setAreas] = useState<Select[]>([]);
 
   const addSizes = (sizesParam: Size[]) => {
     let selectSizes: Select[] = [];
     sizesParam.forEach((el: Size) => {
-      selectSizes.push({ label: el.size, value: el.size });
+      selectSizes.push({ label: el.size, value: el.size, item: el });
     });
     setSizes(selectSizes);
   };
 
   const addAreas = (areasParam: Area[]) => {
-    setAreas(areasParam);
+    let newArea = _.chain(areasParam)
+      .groupBy("province")
+      .map((value: any, key: any) => ({
+        prov: key,
+        cities: value,
+      }))
+      .value();
+    console.log("new area : ", newArea);
+    let selectAreas: Select[] = [];
+    newArea.forEach((el: any) => {
+      selectAreas.push({ label: el.prov, value: el.prov, item: el });
+    });
+    setAreas(selectAreas);
   };
 
   const addFishes = (fishesParam: FishModel[]) => {
