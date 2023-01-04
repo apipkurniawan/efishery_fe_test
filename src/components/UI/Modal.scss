@@ -33,6 +33,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .modal {
+    width: 20rem;
+    left: calc(50% - 10rem);
+  }
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;
