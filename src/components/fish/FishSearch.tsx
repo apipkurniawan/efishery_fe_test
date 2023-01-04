@@ -3,6 +3,7 @@ import { PlusCircleFilled } from "@ant-design/icons";
 import "./FishSearch.scss";
 import { Fragment, useState } from "react";
 import FishForm from "./FishForm";
+import Dropdown from "../UI/Dropdown";
 
 const FishSearch = () => {
   const [formIsShown, setFormIsShown] = useState(false);
@@ -15,12 +16,23 @@ const FishSearch = () => {
     setFormIsShown(false);
   };
 
+  const margin = {
+    marginRight: "1rem",
+  };
+  const listDropdown = ["komoditas", "price", "city", "prov"];
+
   return (
     <Fragment>
       {formIsShown && <FishForm onClose={hideFormHandler} />}
       <Card>
         <div className="search-container">
           <div>
+            <Dropdown
+              name="fish"
+              value={listDropdown}
+              style={margin}
+              placeholder="FilterBy ..."
+            />
             <input type="text" placeholder="search ..." />
           </div>
           <div>
