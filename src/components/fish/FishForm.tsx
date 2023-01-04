@@ -6,6 +6,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
   const submitHandler = () => {};
 
   const listCity = ["jakarta", "bandung"];
+  const widthDropdown = { width: "14.5rem" };
 
   return (
     <Modal onClose={props.onClose}>
@@ -18,6 +19,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <label htmlFor="city">City</label>
           <Dropdown
             name="city"
+            style={widthDropdown}
             value={listCity}
             placeholder="Choose city ..."
           />
@@ -25,6 +27,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
         <div className={`control ${false ? "invalid" : ""}`}>
           <label htmlFor="prov">Provinsi</label>
           <Dropdown
+            style={widthDropdown}
             name="prov"
             value={listCity}
             placeholder="Choose prov ..."

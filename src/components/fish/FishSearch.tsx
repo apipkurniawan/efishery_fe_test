@@ -25,8 +25,9 @@ const FishSearch = () => {
 
   const descHandler = () => {};
 
-  const margin = {
+  const styleDropdown = {
     marginRight: "1rem",
+    width: "10rem",
   };
   const listDropdown = ["komoditas", "price", "city", "prov"];
 
@@ -39,7 +40,7 @@ const FishSearch = () => {
             <Dropdown
               name="fish"
               value={listDropdown}
-              style={margin}
+              style={styleDropdown}
               placeholder="FilterBy ..."
             />
             <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
