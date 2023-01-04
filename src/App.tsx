@@ -1,28 +1,32 @@
 import { useEffect, useState } from "react";
 import FishContextProvider from "./store/fish-context";
 import SteinStore from "stein-js-client";
+import { BackTop } from "antd";
 import { BASE_API_URL } from "./config/base-url";
 import FishModel from "./models/fish";
 import { FilterList } from "./utils/filter-list";
 import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
-import { BackTop } from "antd";
-import "./App.scss";
 import FishSearch from "./components/fish/FishSearch";
+import "./App.scss";
 
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getFishHandler = () => {
+    setLoading(true);
     const store = new SteinStore(BASE_API_URL);
     store.read("list").then(
       (data: FishModel[]) => {
         console.log("GET : ", data);
         setFishes(FilterList(data));
+        setLoading(false);
       },
       (error: any) => {
         console.log("ERROR : ", error);
+        setLoading(false);
       }
     );
   };
@@ -44,8 +48,17 @@ function App() {
       <Header />
       <main>
         <FishThumbnail />
-        <FishSearch />
-        <Fishes items={fishes} />
+        {loading && (
+          <div className="loading">
+            <p>Loading ...</p>
+          </div>
+        )}
+        {!loading && (
+          <>
+            <FishSearch />
+            <Fishes items={fishes} />
+          </>
+        )}
       </main>
       <BackTop className="backtop" />
     </FishContextProvider>
