@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Area } from "../models/area";
 import FishModel from "../models/fish";
+import { Select } from "../models/select";
 import { Size } from "../models/size";
 
 type FishObj = {
-  sizes: Size[];
+  sizes: Select[];
   fishes: FishModel[];
   areas: Area[];
   addSizes: (sizes: Size[]) => void;
@@ -26,12 +27,16 @@ type Props = {
 };
 
 const FishContextProvider = (props: Props) => {
-  const [sizes, setSizes] = useState<Size[]>([]);
+  const [sizes, setSizes] = useState<Select[]>([]);
   const [fishes, setFishes] = useState<FishModel[]>([]);
   const [areas, setAreas] = useState<Area[]>([]);
 
   const addSizes = (sizesParam: Size[]) => {
-    setSizes(sizesParam);
+    let selectSizes: Select[] = [];
+    sizesParam.forEach((el: Size) => {
+      selectSizes.push({ label: el.size, value: el.size });
+    });
+    setSizes(selectSizes);
   };
 
   const addAreas = (areasParam: Area[]) => {

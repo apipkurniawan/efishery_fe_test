@@ -1,11 +1,12 @@
 import React from "react";
+import { Select } from "../../models/select";
 import "./Dropdown.scss";
 
 const Dropdown: React.FC<{
   style?: any;
   placeholder: string;
   name: string;
-  value: string[];
+  value: Select[];
 }> = (props) => {
   return (
     <select
@@ -17,8 +18,8 @@ const Dropdown: React.FC<{
       <option value="" disabled selected hidden>
         {props.placeholder}
       </option>
-      {props.value.map((item) => (
-        <option value={item}>{item}</option>
+      {props.value.map((item: Select) => (
+        <option value={item.value}>{item.label}</option>
       ))}
     </select>
   );

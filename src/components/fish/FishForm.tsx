@@ -1,15 +1,21 @@
-// import { useContext } from "react";
-// import { FishContext } from "../../store/fish-context";
+import { useContext } from "react";
+import { FishContext } from "../../store/fish-context";
+import { useEffect } from "react";
 import Dropdown from "../UI/Dropdown";
 import Modal from "../UI/Modal";
+import { Select } from "../../models/select";
 import "./FishForm.scss";
 
 const FishForm: React.FC<{ onClose: () => void }> = (props) => {
-  // const fishCtx = useContext(FishContext);
+  const fishCtx = useContext(FishContext);
+  const list: Select[] = [];
 
   const submitHandler = () => {};
 
-  const listCity = ["jakarta", "bandung"];
+  useEffect(() => {
+    console.log("FISH FORM!");
+  }, []);
+
   const widthDropdown = { width: "14.5rem" };
 
   return (
@@ -24,7 +30,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <Dropdown
             name="city"
             style={widthDropdown}
-            value={listCity}
+            value={list}
             placeholder="Choose city ..."
           />
         </div>
@@ -33,7 +39,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <Dropdown
             style={widthDropdown}
             name="prov"
-            value={listCity}
+            value={list}
             placeholder="Choose prov ..."
           />
         </div>
@@ -42,7 +48,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <Dropdown
             style={widthDropdown}
             name="size"
-            value={listCity}
+            value={fishCtx.sizes}
             placeholder="Choose size ..."
           />
         </div>

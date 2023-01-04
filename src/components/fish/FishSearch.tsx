@@ -9,6 +9,7 @@ import { Fragment, useState } from "react";
 import FishForm from "./FishForm";
 import Dropdown from "../UI/Dropdown";
 import Button from "../UI/Button";
+import { Select } from "../../models/select";
 
 const FishSearch = () => {
   const [formIsShown, setFormIsShown] = useState(false);
@@ -29,7 +30,7 @@ const FishSearch = () => {
     marginRight: "1rem",
     width: "10rem",
   };
-  const listDropdown = ["komoditas", "price", "city", "prov"];
+  const listDropdown: Select[] = [];
 
   return (
     <>
