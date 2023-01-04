@@ -8,6 +8,7 @@ import "./FishSearch.scss";
 import { Fragment, useState } from "react";
 import FishForm from "./FishForm";
 import Dropdown from "../UI/Dropdown";
+import Button from "../UI/Button";
 
 const FishSearch = () => {
   const [formIsShown, setFormIsShown] = useState(false);
@@ -19,6 +20,10 @@ const FishSearch = () => {
   const hideFormHandler = () => {
     setFormIsShown(false);
   };
+
+  const ascHandler = () => {};
+
+  const descHandler = () => {};
 
   const margin = {
     marginRight: "1rem",
@@ -37,14 +42,16 @@ const FishSearch = () => {
               style={margin}
               placeholder="FilterBy ..."
             />
-            <button>{<SortAscendingOutlined />}</button>
-            <button style={margin}>{<SortDescendingOutlined />}</button>
+            <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
+            <Button onClick={descHandler} style={margin}>
+              {<SortDescendingOutlined />}
+            </Button>
             <input type="text" placeholder="search ..." />
           </div>
           <div>
-            <button onClick={showFormHandler}>
+            <Button onClick={showFormHandler}>
               {<PlusCircleFilled />} Add
-            </button>
+            </Button>
           </div>
         </div>
       </Card>
