@@ -7,10 +7,10 @@ const ConfirmDialog: React.FC<{ onClose: () => void; message: string }> = (
 ) => {
   return (
     <Modal onClose={props.onClose}>
-      <h3 className="title">{props.message}</h3>
+      <h3 className="message">{props.message}</h3>
       <div className="actions">
         <button className="button">Yes</button>
-        <button className="button--alt" onClick={props.onClose}>
+        <button className="button-no" onClick={props.onClose}>
           No
         </button>
       </div>
