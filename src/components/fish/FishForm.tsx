@@ -20,10 +20,9 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
   const fishCtx = useContext(FishContext);
 
   const onChangeProvHandler = (data: any) => {
-    setEnteredProv(data.target.value);
-    const filteredArea = fishCtx.areas.filter(
-      (v) => v.label === data.target.value
-    );
+    const selectedProv = typeof data === "string" ? data : data.target.value;
+    setEnteredProv(selectedProv);
+    const filteredArea = fishCtx.areas.filter((v) => v.label === selectedProv);
     let selectCities: Select[] = [];
     filteredArea[0].item.cities.forEach((el: Area) => {
       selectCities.push({ label: el.city, value: el.city, item: el });
@@ -69,6 +68,8 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
       setEnteredPrice(props.selectedData.price);
       setEnteredProv(props.selectedData.area_provinsi);
       setEnteredSize(props.selectedData.size);
+      onChangeProvHandler(props.selectedData.area_provinsi);
+      setEnteredCity(props.selectedData.area_kota);
     }
   }, []);
 
