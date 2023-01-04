@@ -1,15 +1,19 @@
 import { Fragment, useEffect, useState } from "react";
 import { BackTop } from "antd";
-// import FishContextProvider from "./store/fish-context";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "./config/base-url";
-import FishModel from "./models/fish";
 import { FilterList } from "./utils/filter-list";
 import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
 import FishThumbnail from "./components/fish/FishThumbnail";
 import FishSearch from "./components/fish/FishSearch";
+import FishModel from "./models/fish";
+import { Size } from "./models/size";
+import { Area } from "./models/area";
 import "./App.scss";
+// import FishContextProvider from "./store/fish-context";
+
+const store = new SteinStore(BASE_API_URL);
 
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
@@ -17,28 +21,48 @@ function App() {
 
   const getFishHandler = () => {
     setLoading(true);
-    const store = new SteinStore(BASE_API_URL);
     store.read("list").then(
       (data: FishModel[]) => {
-        console.log("GET : ", data);
+        console.log("GET FISH : ", data);
         setFishes(FilterList(data));
         setLoading(false);
       },
-      (error: any) => {
+      (error: Error) => {
         console.log("ERROR : ", error);
         setLoading(false);
       }
     );
   };
 
+  const getAreaHandler = () => {
+    store.read("option_area").then(
+      (data: Area) => {
+        console.log("GET AREA : ", data);
+      },
+      (error: Error) => {
+        console.log("ERROR : ", error);
+      }
+    );
+  };
+
+  const getSizeHandler = () => {
+    store.read("option_size").then(
+      (data: Size) => {
+        console.log("GET SIZE : ", data);
+      },
+      (error: Error) => {
+        console.log("ERROR : ", error);
+      }
+    );
+  };
+
   const deleteHandler = (id: string) => {
     setLoading(true);
-    const store = new SteinStore(BASE_API_URL);
     store
       .delete("list", {
         search: { uuid: id },
       })
-      .then((res: any) => {
+      .then((res: Error) => {
         console.log("DELETE : ", res);
         getFishHandler();
       });
@@ -48,6 +72,8 @@ function App() {
     const identifier = setTimeout(() => {
       console.log("GET DATA FROM SERVICE!");
       getFishHandler();
+      getAreaHandler();
+      getSizeHandler();
     }, 500);
 
     return () => {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import moment from "moment";
 import CurrencyFormat from "../../utils/currency-format";
 import "./FishItem.scss";
@@ -34,9 +34,6 @@ const FishItem: React.FC<{
           <br />
           <div className="btn-container">
             <Button onClick={props.onShowForm}>{<EditFilled />}</Button>
-            {/* <button onClick={fishCtx.removeFish.bind(null, props.id)}>
-              Delete
-            </button> */}
             <Button onClick={props.onShowConfirm.bind(null, props.id)}>
               {<DeleteFilled />}
             </Button>
