@@ -93,6 +93,8 @@ function App() {
 
   const backtop = {
     marginRight: "-6%",
+    backgroundColor: "#383838",
+    borderRadius: "20px",
   };
 
   return (
