@@ -4,6 +4,8 @@ import FishModel from "../models/fish";
 import { Select } from "../models/select";
 import { Size } from "../models/size";
 import _ from "lodash";
+import { BASE_API_URL } from "../config/base-url";
+import SteinStore from "stein-js-client";
 
 type FishObj = {
   sizes: Select[];
@@ -12,6 +14,7 @@ type FishObj = {
   addSizes: (sizes: Size[]) => void;
   addFishes: (fishes: FishModel[]) => void;
   addAreas: (areas: Area[]) => void;
+  saveFishes: (fishes: FishModel) => void;
 };
 
 export const FishContext = React.createContext<FishObj>({
@@ -21,6 +24,7 @@ export const FishContext = React.createContext<FishObj>({
   addSizes: (sizes: Size[]) => {},
   addFishes: (fishes: FishModel[]) => {},
   addAreas: (areas: Area[]) => {},
+  saveFishes: (fishes: FishModel) => {},
 });
 
 type Props = {
@@ -48,7 +52,6 @@ const FishContextProvider = (props: Props) => {
         cities: value,
       }))
       .value();
-    console.log("new area : ", newArea);
     let selectAreas: Select[] = [];
     newArea.forEach((el: any) => {
       selectAreas.push({ label: el.prov, value: el.prov, item: el });
@@ -60,6 +63,18 @@ const FishContextProvider = (props: Props) => {
     setFishes(fishesParam);
   };
 
+  const saveFishesHandler = (fishesParam: FishModel) => {
+    const store = new SteinStore(BASE_API_URL);
+    store.append("list", [fishesParam]).then(
+      (data: any) => {
+        console.log("SAVE FISH : ", data);
+      },
+      (error: Error) => {
+        console.log("ERROR : ", error);
+      }
+    );
+  };
+
   const contextValue: FishObj = {
     sizes: sizes,
     fishes: fishes,
@@ -67,6 +82,7 @@ const FishContextProvider = (props: Props) => {
     addSizes: addSizes,
     addFishes: addFishes,
     addAreas: addAreas,
+    saveFishes: saveFishesHandler,
   };
 
   return (

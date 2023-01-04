@@ -42,6 +42,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
       new Date().getTime().toString()
     );
     console.log("submit", data);
+    fishCtx.saveFishes(data);
   };
 
   const onChangeKomHandler = (e: any) => {
