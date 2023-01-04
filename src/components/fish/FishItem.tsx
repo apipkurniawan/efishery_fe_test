@@ -4,33 +4,33 @@ import CurrencyFormat from "../../utils/currency-format";
 import "./FishItem.scss";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import Button from "../UI/Button";
-// import { FishContext } from "../../store/fish-context";
+import FishModel from "../../models/fish";
 
 const FishItem: React.FC<{
-  name: string;
-  prov: string;
-  city: string;
-  time: string;
-  date: string;
   id: string;
-  price: string;
+  item: FishModel;
   onShowConfirm: (id: string) => void;
   onShowForm: () => void;
 }> = (props) => {
-  // const fishCtx = useContext(FishContext);
-
   return (
     <li className="fish">
       <div>
-        <h3>{props.name}</h3>
-        <div className="description">
-          {props.city}, {props.prov}
+        <h3>{props.item.komoditas}</h3>
+        <div>
+          <span className="size">Size : {props.item.size}</span>
+          <span className="description">
+            {props.item.area_kota}, {props.item.area_provinsi}
+          </span>
         </div>
-        <div className="price">{CurrencyFormat(parseFloat(props.price))}</div>
+        <div className="price">
+          {CurrencyFormat(parseFloat(props.item.price))}
+        </div>
       </div>
       <div>
         <div className="right-column">
-          <label>{moment(props.date).format("ddd, D MMMM YYYY")}</label>
+          <label>
+            {moment(props.item.tgl_parsed).format("ddd, D MMMM YYYY")}
+          </label>
           <br />
           <div className="btn-container">
             <Button onClick={props.onShowForm}>{<EditFilled />}</Button>

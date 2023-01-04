@@ -36,16 +36,11 @@ const Fishes: React.FC<{
     setFormIsShown(false);
   };
 
-  const fishesList = props.items.map((item) => (
+  const fishesList = props.items.map((item: FishModel) => (
     <FishItem
       key={item.uuid}
       id={item.uuid}
-      name={item.komoditas}
-      prov={item.area_provinsi}
-      city={item.area_kota}
-      time={item.timestamp}
-      date={item.tgl_parsed}
-      price={item.price}
+      item={item}
       onShowConfirm={showConfirmHandler}
       onShowForm={showFormHandler}
     />

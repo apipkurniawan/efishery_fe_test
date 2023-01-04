@@ -34,6 +34,15 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           />
         </div>
         <div className={`control ${false ? "invalid" : ""}`}>
+          <label htmlFor="size">Size</label>
+          <Dropdown
+            style={widthDropdown}
+            name="size"
+            value={listCity}
+            placeholder="Choose size ..."
+          />
+        </div>
+        <div className={`control ${false ? "invalid" : ""}`}>
           <label htmlFor="price">Price</label>
           <input type="text" id="price" />
         </div>

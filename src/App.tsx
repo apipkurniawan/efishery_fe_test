@@ -11,7 +11,6 @@ import FishModel from "./models/fish";
 import { Size } from "./models/size";
 import { Area } from "./models/area";
 import "./App.scss";
-// import FishContextProvider from "./store/fish-context";
 
 const store = new SteinStore(BASE_API_URL);
 
@@ -83,7 +82,6 @@ function App() {
   }, []);
 
   return (
-    // <FishContextProvider></FishContextProvider>
     <Fragment>
       <Header />
       <main>
