@@ -11,6 +11,7 @@ import FishModel from "./models/fish";
 import { Size } from "./models/size";
 import { Area } from "./models/area";
 import "./App.scss";
+import { SortNumber } from "./utils/sort-list";
 
 const store = new SteinStore(BASE_API_URL);
 
@@ -47,7 +48,12 @@ function App() {
   const getSizeHandler = () => {
     store.read("option_size").then(
       (data: Size[]) => {
-        console.log("GET SIZE : ", FilterSize(data));
+        const filteredData = FilterSize(data);
+        let newSize: number[] = [];
+        filteredData.forEach((el: Size) => {
+          newSize.push(Number(el.size));
+        });
+        console.log("GET SIZE : ", SortNumber(newSize));
       },
       (error: Error) => {
         console.log("ERROR : ", error);
