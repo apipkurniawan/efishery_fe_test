@@ -8,7 +8,9 @@ import "./FishForm.scss";
 import { Area } from "../../models/area";
 import FishModel from "../../models/fish";
 
-const FishForm: React.FC<{ onClose: () => void }> = (props) => {
+const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
+  props
+) => {
   const [enteredKomoditas, setEnteredKomoditas] = useState("");
   const [enteredProv, setEnteredProv] = useState("");
   const [enteredCity, setEnteredCity] = useState("");
@@ -62,6 +64,12 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
 
   useEffect(() => {
     console.log("FISH FORM!");
+    if (props.selectedData) {
+      setEnteredKomoditas(props.selectedData.komoditas);
+      setEnteredPrice(props.selectedData.price);
+      setEnteredProv(props.selectedData.area_provinsi);
+      setEnteredSize(props.selectedData.size);
+    }
   }, []);
 
   const widthDropdown = { width: "14.5rem" };
@@ -84,6 +92,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
             style={widthDropdown}
             name="prov"
             value={fishCtx.areas}
+            selected={enteredProv}
             onChange={onChangeProvHandler}
             placeholder="Choose prov ..."
           />
@@ -94,6 +103,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
             name="city"
             style={widthDropdown}
             value={cities}
+            selected={enteredCity}
             onChange={onChangeCityHandler}
             placeholder="Choose city ..."
           />
@@ -103,6 +113,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <Dropdown
             style={widthDropdown}
             name="size"
+            selected={enteredSize}
             onChange={onChangeSizeHandler}
             value={fishCtx.sizes}
             placeholder="Choose size ..."

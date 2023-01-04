@@ -13,6 +13,7 @@ const Fishes: React.FC<{
   const [confirmIsShown, setConfirmIsShown] = useState(false);
   const [formIsShown, setFormIsShown] = useState(false);
   const [id, setId] = useState("");
+  const [selectedData, setSelectedData] = useState<FishModel>();
 
   const showConfirmHandler = (id: string) => {
     setId(id);
@@ -28,7 +29,8 @@ const Fishes: React.FC<{
     setConfirmIsShown(false);
   };
 
-  const showFormHandler = () => {
+  const showFormHandler = (selectedData: FishModel) => {
+    setSelectedData(selectedData);
     setFormIsShown(true);
   };
 
@@ -55,7 +57,9 @@ const Fishes: React.FC<{
           onAccept={deleteFishHandler}
         />
       )}
-      {formIsShown && <FishForm onClose={hideFormHandler} />}
+      {formIsShown && (
+        <FishForm selectedData={selectedData} onClose={hideFormHandler} />
+      )}
       <Card>
         <ul>{fishesList}</ul>
       </Card>

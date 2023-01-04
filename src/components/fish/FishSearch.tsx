@@ -42,6 +42,7 @@ const FishSearch = () => {
               <Dropdown
                 name="fish"
                 value={listDropdown}
+                selected=""
                 style={styleDropdown}
                 placeholder="FilterBy ..."
               />

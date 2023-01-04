@@ -7,6 +7,7 @@ const Dropdown: React.FC<{
   onChange?: (data: any) => void;
   placeholder: string;
   name: string;
+  selected: string;
   value: Select[];
 }> = (props) => {
   return (
@@ -17,11 +18,13 @@ const Dropdown: React.FC<{
       className="dropdown"
       onChange={props.onChange}
     >
-      <option value="" disabled selected hidden>
+      <option value="" disabled selected={!props.selected} hidden>
         {props.placeholder}
       </option>
       {props.value.map((item: Select) => (
-        <option value={item.value}>{item.label}</option>
+        <option selected={props.selected === item.value} value={item.value}>
+          {item.label}
+        </option>
       ))}
     </select>
   );

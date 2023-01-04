@@ -10,7 +10,7 @@ const FishItem: React.FC<{
   id: string;
   item: FishModel;
   onShowConfirm: (id: string) => void;
-  onShowForm: () => void;
+  onShowForm: (selectedData: FishModel) => void;
 }> = (props) => {
   return (
     <li className="fish">
@@ -33,7 +33,9 @@ const FishItem: React.FC<{
           </label>
           <br />
           <div className="btn-container">
-            <Button onClick={props.onShowForm}>{<EditFilled />}</Button>
+            <Button onClick={props.onShowForm.bind(null, props.item)}>
+              {<EditFilled />}
+            </Button>
             <Button onClick={props.onShowConfirm.bind(null, props.id)}>
               {<DeleteFilled />}
             </Button>
