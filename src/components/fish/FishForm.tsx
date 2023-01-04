@@ -31,7 +31,6 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    console.log("submitHandler");
     let data = new FishModel(
       enteredKomoditas,
       enteredProv,
@@ -41,8 +40,8 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
       new Date().toISOString(),
       new Date().getTime().toString()
     );
-    console.log("submit", data);
     fishCtx.saveFishes(data);
+    props.onClose();
   };
 
   const onChangeKomHandler = (e: any) => {
