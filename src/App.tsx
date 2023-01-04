@@ -27,6 +27,7 @@ function App() {
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
         setFishes(FilterFish(data));
+        fishCtx.addFishes(fishes);
         setLoading(false);
       },
       (error: Error) => {
@@ -40,6 +41,7 @@ function App() {
     store.read("option_area").then(
       (data: Area[]) => {
         console.log("GET AREA : ", FilterArea(data));
+        fishCtx.addAreas(FilterArea(data));
       },
       (error: Error) => {
         console.log("ERROR : ", error);
@@ -61,7 +63,7 @@ function App() {
           newSize.push({ size: sortedSize[i].toString() });
         }
         console.log("GET SIZE : ", newSize);
-        fishCtx.addSize(newSize);
+        fishCtx.addSizes(newSize);
       },
       (error: Error) => {
         console.log("ERROR : ", error);
