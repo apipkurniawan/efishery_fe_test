@@ -1,8 +1,12 @@
+// import { useContext } from "react";
+// import { FishContext } from "../../store/fish-context";
 import Dropdown from "../UI/Dropdown";
 import Modal from "../UI/Modal";
 import "./FishForm.scss";
 
 const FishForm: React.FC<{ onClose: () => void }> = (props) => {
+  // const fishCtx = useContext(FishContext);
+
   const submitHandler = () => {};
 
   const listCity = ["jakarta", "bandung"];

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { BackTop } from "antd";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "./config/base-url";
@@ -12,12 +12,14 @@ import { Size } from "./models/size";
 import { Area } from "./models/area";
 import "./App.scss";
 import { SortNumber } from "./utils/sort-list";
+import { FishContext } from "./store/fish-context";
 
 const store = new SteinStore(BASE_API_URL);
 
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const fishCtx = useContext(FishContext);
 
   const getFishHandler = () => {
     setLoading(true);
@@ -49,11 +51,17 @@ function App() {
     store.read("option_size").then(
       (data: Size[]) => {
         const filteredData = FilterSize(data);
-        let newSize: number[] = [];
+        let sizeNum: number[] = [];
+        let newSize: Size[] = [];
         filteredData.forEach((el: Size) => {
-          newSize.push(Number(el.size));
+          sizeNum.push(Number(el.size));
         });
-        console.log("GET SIZE : ", SortNumber(newSize));
+        let sortedSize = SortNumber(sizeNum);
+        for (let i = 0; i < sortedSize.length; i++) {
+          newSize.push({ size: sortedSize[i].toString() });
+        }
+        console.log("GET SIZE : ", newSize);
+        fishCtx.addSize(newSize);
       },
       (error: Error) => {
         console.log("ERROR : ", error);

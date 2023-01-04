@@ -1,60 +1,30 @@
 import React, { useState } from "react";
-import SteinStore from "stein-js-client";
-import { BASE_API_URL } from "../config/base-url";
-import FishModel from "../models/fish";
-import { FilterFish } from "../utils/filter-list";
+import { Size } from "../models/size";
 
 type FishObj = {
-  items: FishModel[];
-  getFish: () => void;
-  addFish: (text: string) => void;
-  removeFish: (id: string) => void;
+  sizes: Size[];
+  addSize: (sizes: Size[]) => void;
 };
 
 export const FishContext = React.createContext<FishObj>({
-  items: [],
-  getFish: () => {},
-  addFish: () => {},
-  removeFish: (id: string) => {},
+  sizes: [],
+  addSize: (sizes: Size[]) => {},
 });
 
 type Props = {
   children: React.ReactNode;
 };
 
-const store = new SteinStore(BASE_API_URL);
-
 const FishContextProvider = (props: Props) => {
-  const [fishes, setFishes] = useState<FishModel[]>([]);
+  const [sizes, setSizes] = useState<Size[]>([]);
 
-  const getFishHandler = () => {
-    store.read("list").then(
-      (data: FishModel[]) => {
-        console.log("get", data);
-        setFishes(FilterFish(data));
-      },
-      (error: any) => {}
-    );
-  };
-
-  const addFishHandler = (txt: string) => {};
-
-  const removeFishHandler = (uuid: string) => {
-    store
-      .delete("list", {
-        search: { uuid },
-      })
-      .then((res: any) => {
-        console.log("delete", res);
-        getFishHandler();
-      });
+  const addSizes = (sizes: Size[]) => {
+    setSizes(sizes);
   };
 
   const contextValue: FishObj = {
-    items: fishes,
-    getFish: getFishHandler,
-    addFish: addFishHandler,
-    removeFish: removeFishHandler,
+    sizes: sizes,
+    addSize: addSizes,
   };
 
   return (
