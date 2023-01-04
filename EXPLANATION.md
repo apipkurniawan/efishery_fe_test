@@ -18,3 +18,5 @@
   > Custom popup utk confirm dialog atau isi/ubah data
 - **Back to Top Button**
   > Untuk memudahkan kembali ke bagian atas halaman
+- **Card**
+  > Untuk mendisplay data dengan paduan warna yang nyaman di mata dan shadow yang tidak berlebihan
