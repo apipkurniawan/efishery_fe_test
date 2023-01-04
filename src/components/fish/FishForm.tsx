@@ -1,15 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FishContext } from "../../store/fish-context";
 import { useEffect } from "react";
 import Dropdown from "../UI/Dropdown";
 import Modal from "../UI/Modal";
 import { Select } from "../../models/select";
 import "./FishForm.scss";
+import { Area } from "../../models/area";
 
 const FishForm: React.FC<{ onClose: () => void }> = (props) => {
+  const [cities, setCities] = useState<Select[]>([]);
   const fishCtx = useContext(FishContext);
-  const list: Select[] = [];
 
+  const onChangeProvHandler = (data: any) => {
+    const filteredArea = fishCtx.areas.filter(
+      (v) => v.label === data.target.value
+    );
+    let selectCities: Select[] = [];
+    filteredArea[0].item.cities.forEach((el: Area) => {
+      selectCities.push({ label: el.city, value: el.city, item: el });
+    });
+    setCities(selectCities);
+  };
   const submitHandler = () => {};
 
   useEffect(() => {
@@ -31,6 +42,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
             style={widthDropdown}
             name="prov"
             value={fishCtx.areas}
+            onChange={onChangeProvHandler}
             placeholder="Choose prov ..."
           />
         </div>
@@ -39,7 +51,7 @@ const FishForm: React.FC<{ onClose: () => void }> = (props) => {
           <Dropdown
             name="city"
             style={widthDropdown}
-            value={list}
+            value={cities}
             placeholder="Choose city ..."
           />
         </div>

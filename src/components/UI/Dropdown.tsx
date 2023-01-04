@@ -4,6 +4,7 @@ import "./Dropdown.scss";
 
 const Dropdown: React.FC<{
   style?: any;
+  onChange?: (data: any) => void;
   placeholder: string;
   name: string;
   value: Select[];
@@ -14,6 +15,7 @@ const Dropdown: React.FC<{
       style={props.style}
       id={props.name}
       className="dropdown"
+      onChange={props.onChange}
     >
       <option value="" disabled selected hidden>
         {props.placeholder}
