@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { BackTop } from "antd";
-import FishContextProvider from "./store/fish-context";
+// import FishContextProvider from "./store/fish-context";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "./config/base-url";
 import FishModel from "./models/fish";
@@ -31,6 +31,19 @@ function App() {
     );
   };
 
+  const deleteHandler = (id: string) => {
+    setLoading(true);
+    const store = new SteinStore(BASE_API_URL);
+    store
+      .delete("list", {
+        search: { uuid: id },
+      })
+      .then((res: any) => {
+        console.log("DELETE : ", res);
+        getFishHandler();
+      });
+  };
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("GET DATA FROM SERVICE!");
@@ -44,7 +57,8 @@ function App() {
   }, []);
 
   return (
-    <FishContextProvider>
+    // <FishContextProvider></FishContextProvider>
+    <Fragment>
       <Header />
       <main>
         <FishThumbnail />
@@ -56,12 +70,12 @@ function App() {
         {!loading && (
           <>
             <FishSearch />
-            <Fishes items={fishes} />
+            <Fishes items={fishes} onDelete={deleteHandler} />
           </>
         )}
       </main>
       <BackTop className="backtop" />
-    </FishContextProvider>
+    </Fragment>
   );
 }
 

@@ -4,11 +4,12 @@ import FishItem from "./FishItem";
 import ConfirmDialog from "../UI/ConfirmDialog";
 import FishForm from "./FishForm";
 import FishModel from "../../models/fish";
-import SteinStore from "stein-js-client";
-import { BASE_API_URL } from "../../config/base-url";
 import "./Fish.scss";
 
-const Fishes: React.FC<{ items: FishModel[] }> = (props) => {
+const Fishes: React.FC<{
+  items: FishModel[];
+  onDelete: (id: string) => void;
+}> = (props) => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
   const [formIsShown, setFormIsShown] = useState(false);
   const [id, setId] = useState("");
@@ -19,15 +20,8 @@ const Fishes: React.FC<{ items: FishModel[] }> = (props) => {
   };
 
   const deleteFishHandler = () => {
-    const store = new SteinStore(BASE_API_URL);
-    store
-      .delete("list", {
-        search: { uuid: id },
-      })
-      .then((res: any) => {
-        console.log("DELETE : ", res);
-        hideConfirmHandler();
-      });
+    hideConfirmHandler();
+    props.onDelete(id);
   };
 
   const hideConfirmHandler = () => {
