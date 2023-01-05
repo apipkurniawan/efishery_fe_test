@@ -93,7 +93,8 @@ function App() {
       const sortedFishes = SortObject(fishes, filterBy, sortkey);
       console.log("sortedFishes", sortedFishes);
       // fishCtx.addFishes(sortedFishes);
-      setFishes(sortedFishes);
+      const fishTmp = [...sortedFishes];
+      setFishes(fishTmp);
     }
   };
 
