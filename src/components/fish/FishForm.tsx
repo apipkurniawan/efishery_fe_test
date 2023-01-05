@@ -8,9 +8,11 @@ import "./FishForm.scss";
 import { Area } from "../../models/area";
 import FishModel from "../../models/fish";
 
-const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
-  props
-) => {
+const FishForm: React.FC<{
+  onClose: () => void;
+  onSave: () => void;
+  selectedData?: FishModel;
+}> = (props) => {
   const [enteredKomoditas, setEnteredKomoditas] = useState("");
   const [enteredProv, setEnteredProv] = useState("");
   const [enteredCity, setEnteredCity] = useState("");
@@ -50,7 +52,7 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
     } else {
       fishCtx.editFishes(data);
     }
-    props.onClose();
+    props.onSave();
   };
 
   const onChangeKomHandler = (e: any) => {

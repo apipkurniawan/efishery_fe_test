@@ -13,6 +13,7 @@ import { Select } from "../../models/select";
 
 const FishSearch: React.FC<{
   onSearch: (txt: string) => void;
+  onSave: () => void;
   onFilter: (sortkey: string, filterBy: string) => void;
 }> = (props) => {
   const [formIsShown, setFormIsShown] = useState(false);
@@ -26,6 +27,11 @@ const FishSearch: React.FC<{
 
   const hideFormHandler = () => {
     setFormIsShown(false);
+  };
+
+  const saveHandler = () => {
+    setFormIsShown(false);
+    props.onSave();
   };
 
   const ascHandler = () => {
@@ -73,7 +79,9 @@ const FishSearch: React.FC<{
 
   return (
     <Fragment>
-      {formIsShown && <FishForm onClose={hideFormHandler} />}
+      {formIsShown && (
+        <FishForm onSave={saveHandler} onClose={hideFormHandler} />
+      )}
       <div className="search">
         <Card>
           <div className="search-container">

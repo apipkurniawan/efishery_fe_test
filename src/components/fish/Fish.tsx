@@ -9,6 +9,7 @@ import "./Fish.scss";
 const Fishes: React.FC<{
   items: FishModel[];
   onDelete: (id: string) => void;
+  onSave: () => void;
 }> = (props) => {
   const [confirmIsShown, setConfirmIsShown] = useState(false);
   const [formIsShown, setFormIsShown] = useState(false);
@@ -23,6 +24,11 @@ const Fishes: React.FC<{
   const deleteFishHandler = () => {
     hideConfirmHandler();
     props.onDelete(id);
+  };
+
+  const saveHandler = () => {
+    hideConfirmHandler();
+    props.onSave();
   };
 
   const hideConfirmHandler = () => {
@@ -58,7 +64,11 @@ const Fishes: React.FC<{
         />
       )}
       {formIsShown && (
-        <FishForm selectedData={selectedData} onClose={hideFormHandler} />
+        <FishForm
+          selectedData={selectedData}
+          onSave={saveHandler}
+          onClose={hideFormHandler}
+        />
       )}
       <Card>
         <ul>{fishesList}</ul>

@@ -141,8 +141,16 @@ function App() {
         )}
         {!loading && (
           <>
-            <FishSearch onFilter={filterHandler} onSearch={searchHandler} />
-            <Fishes items={fishes} onDelete={deleteHandler} />
+            <FishSearch
+              onSave={getFishHandler}
+              onFilter={filterHandler}
+              onSearch={searchHandler}
+            />
+            <Fishes
+              items={fishes}
+              onSave={getFishHandler}
+              onDelete={deleteHandler}
+            />
           </>
         )}
       </main>
