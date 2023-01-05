@@ -16,6 +16,7 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
   const [enteredCity, setEnteredCity] = useState("");
   const [enteredSize, setEnteredSize] = useState("");
   const [enteredPrice, setEnteredPrice] = useState("");
+  const [formIsValid, setFormIsValid] = useState(false);
   const [cities, setCities] = useState<Select[]>([]);
   const fishCtx = useContext(FishContext);
 
@@ -80,6 +81,24 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
     }
   }, []);
 
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("VALIDITY");
+      setFormIsValid(
+        enteredKomoditas.trim().length > 0 &&
+          enteredCity.trim().length > 0 &&
+          enteredPrice.trim().length > 0 &&
+          enteredProv.trim().length > 0 &&
+          enteredSize.trim().length > 0
+      );
+    }, 500);
+
+    return () => {
+      console.log("CLEANUP VALIDITY");
+      clearTimeout(identifier);
+    };
+  }, [enteredCity, enteredKomoditas, enteredPrice, enteredProv, enteredSize]);
+
   const widthDropdown = { width: "14.5rem" };
 
   return (
@@ -137,7 +156,7 @@ const FishForm: React.FC<{ onClose: () => void; selectedData?: FishModel }> = (
           />
         </div>
         <div className="actions">
-          <button type="submit" className="btn">
+          <button type="submit" className="btn" disabled={!formIsValid}>
             Submit
           </button>
         </div>
