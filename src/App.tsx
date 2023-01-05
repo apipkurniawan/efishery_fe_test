@@ -11,7 +11,7 @@ import FishModel from "./models/fish";
 import { Size } from "./models/size";
 import { Area } from "./models/area";
 import "./App.scss";
-import { SortNumber } from "./utils/sort-list";
+import { SortNumber, SortObject } from "./utils/sort-list";
 import { FishContext } from "./store/fish-context";
 import { Unique } from "./utils/unique-list";
 
@@ -86,6 +86,16 @@ function App() {
       });
   };
 
+  const filterHandler = (sortkey: string, filterBy: string) => {
+    console.log("filterBy", filterBy);
+    console.log("sortkey", sortkey);
+    if (sortkey && filterBy) {
+      const sortedFishes = SortObject(fishes, filterBy, sortkey);
+      console.log("sortedFishes", sortedFishes);
+      setFishes(sortedFishes);
+    }
+  };
+
   const searchHandler = (searchInput: string) => {
     let txtInput = searchInput.toLowerCase();
     if (txtInput) {
@@ -130,7 +140,7 @@ function App() {
         )}
         {!loading && (
           <>
-            <FishSearch onSearch={searchHandler} />
+            <FishSearch onFilter={filterHandler} onSearch={searchHandler} />
             <Fishes items={fishes} onDelete={deleteHandler} />
           </>
         )}

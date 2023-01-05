@@ -11,9 +11,14 @@ import Dropdown from "../UI/Dropdown";
 import Button from "../UI/Button";
 import { Select } from "../../models/select";
 
-const FishSearch: React.FC<{ onSearch: (txt: string) => void }> = (props) => {
+const FishSearch: React.FC<{
+  onSearch: (txt: string) => void;
+  onFilter: (sortkey: string, filterBy: string) => void;
+}> = (props) => {
   const [formIsShown, setFormIsShown] = useState(false);
   const [enteredSearch, setEnteredSearch] = useState("");
+  const [filterBy, setFilterBy] = useState("");
+  const [sortKey, setSortKey] = useState("");
 
   const showFormHandler = () => {
     setFormIsShown(true);
@@ -23,9 +28,16 @@ const FishSearch: React.FC<{ onSearch: (txt: string) => void }> = (props) => {
     setFormIsShown(false);
   };
 
-  const ascHandler = () => {};
+  const ascHandler = () => {
+    setSortKey("ASC");
+  };
+  const descHandler = () => {
+    setSortKey("DESC");
+  };
 
-  const descHandler = () => {};
+  const onChangeFilterByHandler = (event: any) => {
+    setFilterBy(event.target.value);
+  };
 
   const searchChangeHandler = (event: any) => {
     setEnteredSearch(event.target.value);
@@ -43,11 +55,28 @@ const FishSearch: React.FC<{ onSearch: (txt: string) => void }> = (props) => {
     };
   }, [enteredSearch]);
 
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("SORT!");
+      props.onFilter(sortKey, filterBy);
+    }, 100);
+    return () => {
+      console.log("CLEANUP");
+      clearTimeout(identifier);
+    };
+  }, [sortKey, filterBy]);
+
   const styleDropdown = {
     marginRight: "1rem",
     width: "10rem",
   };
-  const listDropdown: Select[] = [];
+  const listDropdown: Select[] = [
+    { label: "Komoditas", value: "komoditas" },
+    { label: "City", value: "area_kota" },
+    { label: "Province", value: "area_provinsi" },
+    { label: "Size", value: "size" },
+    { label: "Price", value: "price" },
+  ];
 
   return (
     <Fragment>
@@ -59,9 +88,10 @@ const FishSearch: React.FC<{ onSearch: (txt: string) => void }> = (props) => {
               <Dropdown
                 name="fish"
                 value={listDropdown}
-                selected=""
+                selected={filterBy}
                 style={styleDropdown}
                 placeholder="FilterBy ..."
+                onChange={onChangeFilterByHandler}
               />
               <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
               <Button onClick={descHandler}>
