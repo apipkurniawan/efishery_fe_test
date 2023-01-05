@@ -99,6 +99,8 @@ function App() {
           (item.price && item.price.toLowerCase() === txtInput)
       );
       setFishes(filtered);
+    } else {
+      setFishes(fishCtx.fishes);
     }
   };
 
