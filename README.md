@@ -4,6 +4,8 @@
 
 ## demo
 
+https://efishery-fe-test-one.vercel.app/
+
 ## project setup
 
 ### `npm install`
