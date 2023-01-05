@@ -13,6 +13,7 @@ import { Area } from "./models/area";
 import "./App.scss";
 import { SortNumber } from "./utils/sort-list";
 import { FishContext } from "./store/fish-context";
+import { Unique } from "./utils/unique-list";
 
 const store = new SteinStore(BASE_API_URL);
 
@@ -26,7 +27,8 @@ function App() {
     store.read("list").then(
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
-        setFishes(FilterFish(data));
+        const array: any = FilterFish(data);
+        setFishes(Unique(array, "uuid"));
         fishCtx.addFishes(fishes);
         setLoading(false);
       },
