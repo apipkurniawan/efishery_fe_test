@@ -28,8 +28,9 @@ function App() {
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
         const array: any = FilterFish(data);
-        setFishes(Unique(array, "uuid"));
-        fishCtx.addFishes(fishes);
+        const unique = Unique(array, "uuid");
+        fishCtx.addFishes(unique);
+        setFishes(unique);
         setLoading(false);
       },
       (error: Error) => {
