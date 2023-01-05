@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from "react";
-import { BackTop } from "antd";
+import { FloatButton } from "antd";
 import SteinStore from "stein-js-client";
 import { BASE_API_URL } from "./config/base-url";
 import { FilterArea, FilterFish, FilterSize } from "./utils/filter-list";
@@ -116,7 +116,7 @@ function App() {
           </>
         )}
       </main>
-      <BackTop className="backtop" />
+      <FloatButton.BackTop />
     </Fragment>
   );
 }
