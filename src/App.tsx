@@ -85,6 +85,22 @@ function App() {
       });
   };
 
+  const searchHandler = (searchInput: string) => {
+    let txtInput = searchInput.toLowerCase();
+    if (txtInput) {
+      const filtered = fishes.filter(
+        (item: FishModel) =>
+          (item.area_kota && item.area_kota.toLowerCase() === txtInput) ||
+          (item.area_provinsi &&
+            item.area_provinsi.toLowerCase() === txtInput) ||
+          (item.komoditas && item.komoditas.toLowerCase() === txtInput) ||
+          (item.size && item.size.toLowerCase() === txtInput) ||
+          (item.price && item.price.toLowerCase() === txtInput)
+      );
+      setFishes(filtered);
+    }
+  };
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("GET DATA FROM SERVICE!");
@@ -111,7 +127,7 @@ function App() {
         )}
         {!loading && (
           <>
-            <FishSearch />
+            <FishSearch onSearch={searchHandler} />
             <Fishes items={fishes} onDelete={deleteHandler} />
           </>
         )}
