@@ -22,7 +22,11 @@ const Dropdown: React.FC<{
         {props.placeholder}
       </option>
       {props.value.map((item: Select) => (
-        <option selected={props.selected === item.value} value={item.value}>
+        <option
+          key={item.value}
+          selected={props.selected === item.value}
+          value={item.value}
+        >
           {item.label}
         </option>
       ))}
