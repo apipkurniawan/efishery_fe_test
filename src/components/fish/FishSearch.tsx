@@ -56,14 +56,7 @@ const FishSearch: React.FC<{
   }, [enteredSearch]);
 
   useEffect(() => {
-    const identifier = setTimeout(() => {
-      console.log("SORT!");
-      props.onFilter(sortKey, filterBy);
-    }, 100);
-    return () => {
-      console.log("CLEANUP");
-      clearTimeout(identifier);
-    };
+    props.onFilter(sortKey, filterBy);
   }, [sortKey, filterBy]);
 
   const styleDropdown = {

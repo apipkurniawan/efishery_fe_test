@@ -92,6 +92,7 @@ function App() {
     if (sortkey && filterBy) {
       const sortedFishes = SortObject(fishes, filterBy, sortkey);
       console.log("sortedFishes", sortedFishes);
+      fishCtx.addFishes(sortedFishes);
       setFishes(sortedFishes);
     }
   };
