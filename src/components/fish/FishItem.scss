@@ -13,10 +13,11 @@
 .size {
   font-size: 14px;
   margin-right: 1rem;
+  margin-bottom: 0.1rem;
 }
 
 .description {
-  font-size: 15px;
+  font-size: 14px;
   font-style: italic;
 }
 
@@ -27,15 +28,25 @@
   font-size: 1.25rem;
 }
 
-label {
+.date {
   font-weight: bold;
-  margin-right: 1rem;
 }
 
 .right-column {
-  text-align: right;
+  width: 10rem;
+  text-align: center;
 }
 
 .btn-container {
   margin-top: 1rem;
+}
+
+@media (max-width: 412px) {
+  .right-column {
+    margin-top: 0.5rem;
+    width: 7rem;
+  }
+  .date {
+    font-size: 13px;
+  }
 }

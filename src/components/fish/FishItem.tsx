@@ -16,11 +16,9 @@ const FishItem: React.FC<{
     <li className="fish">
       <div>
         <h3>{props.item.komoditas}</h3>
-        <div>
-          <span className="size">Size : {props.item.size}</span>
-          <span className="description">
-            {props.item.area_kota}, {props.item.area_provinsi}
-          </span>
+        <div className="size">Size : {props.item.size}</div>
+        <div className="description">
+          {props.item.area_kota}, {props.item.area_provinsi}
         </div>
         <div className="price">
           {CurrencyFormat(parseFloat(props.item.price))}
@@ -28,10 +26,9 @@ const FishItem: React.FC<{
       </div>
       <div>
         <div className="right-column">
-          <label>
+          <div className="date">
             {moment(props.item.tgl_parsed).format("ddd, D MMMM YYYY")}
-          </label>
-          <br />
+          </div>
           <div className="btn-container">
             <Button onClick={props.onShowForm.bind(null, props.item)}>
               {<EditFilled />}

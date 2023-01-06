@@ -88,7 +88,7 @@ const FishSearch: React.FC<{
 
   const styleDropdown = {
     marginRight: "1rem",
-    width: "10rem",
+    width: "7rem",
   };
   const listDropdown: Select[] = FilterDropdown;
 
