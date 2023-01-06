@@ -26,7 +26,7 @@ function App() {
     setLoading(true);
     store.read("list").then(
       (data: FishModel[]) => {
-        console.log("GET FISH : ", data);
+        // console.log("GET FISH : ", data);
         const sortedarray: any = SortObject(
           FilterFish(data),
           "tgl_parsed",
@@ -35,7 +35,7 @@ function App() {
         const array: any = FilterFish(sortedarray);
         const unique = Unique(array, "uuid");
         fishCtx.addFishes(unique);
-        console.log("FISHES : ", unique);
+        // console.log("FISHES : ", unique);
         setFishes(unique);
         setLoading(false);
       },
@@ -49,7 +49,7 @@ function App() {
   const getAreaHandler = () => {
     store.read("option_area").then(
       (data: Area[]) => {
-        console.log("GET AREA : ", FilterArea(data));
+        // console.log("GET AREA : ", FilterArea(data));
         fishCtx.addAreas(FilterArea(data));
       },
       (error: Error) => {
@@ -71,7 +71,7 @@ function App() {
         for (let i = 0; i < sortedSize.length; i++) {
           newSize.push({ size: sortedSize[i].toString() });
         }
-        console.log("GET SIZE : ", newSize);
+        // console.log("GET SIZE : ", newSize);
         fishCtx.addSizes(newSize);
       },
       (error: Error) => {
@@ -87,7 +87,7 @@ function App() {
         search: { uuid: id },
       })
       .then((res: Error) => {
-        console.log("DELETE : ", res);
+        // console.log("DELETE : ", res);
         getFishHandler();
       });
   };
@@ -97,6 +97,8 @@ function App() {
       const sortedFishes = SortObject(fishes, filterBy, sortkey);
       const fishTmp = [...sortedFishes];
       setFishes(fishTmp);
+    } else {
+      setFishes([...fishCtx.fishes]);
     }
   };
 
@@ -105,12 +107,12 @@ function App() {
     if (txtInput) {
       const filtered = fishes.filter(
         (item: FishModel) =>
-          (item.area_kota && item.area_kota.toLowerCase() === txtInput) ||
+          (item.area_kota && item.area_kota.toLowerCase().includes(txtInput)) ||
           (item.area_provinsi &&
-            item.area_provinsi.toLowerCase() === txtInput) ||
-          (item.komoditas && item.komoditas.toLowerCase() === txtInput) ||
-          (item.size && item.size.toLowerCase() === txtInput) ||
-          (item.price && item.price.toLowerCase() === txtInput)
+            item.area_provinsi.toLowerCase().includes(txtInput)) ||
+          (item.komoditas && item.komoditas.toLowerCase().includes(txtInput)) ||
+          (item.size && item.size.toLowerCase().includes(txtInput)) ||
+          (item.price && item.price.toLowerCase().includes(txtInput))
       );
       setFishes(filtered);
     } else {
@@ -120,14 +122,14 @@ function App() {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("GET DATA FROM SERVICE!");
+      // console.log("GET DATA FROM SERVICE!");
       getFishHandler();
       getAreaHandler();
       getSizeHandler();
     }, 500);
 
     return () => {
-      console.log("CLEANUP!");
+      // console.log("CLEANUP!");
       clearTimeout(identifier);
     };
   }, []);

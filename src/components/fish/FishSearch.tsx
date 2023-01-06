@@ -1,5 +1,6 @@
 import Card from "../UI/Card";
 import {
+  ClearOutlined,
   PlusCircleFilled,
   SortAscendingOutlined,
   SortDescendingOutlined,
@@ -10,6 +11,7 @@ import FishForm from "./FishForm";
 import Dropdown from "../UI/Dropdown";
 import Button from "../UI/Button";
 import { Select } from "../../models/select";
+import { FilterDropdown } from "../../constants/filter-dropdown";
 
 const FishSearch: React.FC<{
   onSearch: (txt: string) => void;
@@ -20,6 +22,8 @@ const FishSearch: React.FC<{
   const [enteredSearch, setEnteredSearch] = useState("");
   const [filterBy, setFilterBy] = useState("");
   const [sortKey, setSortKey] = useState("");
+  const [classAsc, setClassAsc] = useState("");
+  const [classDesc, setClassDesc] = useState("");
 
   const showFormHandler = () => {
     setFormIsShown(true);
@@ -35,9 +39,13 @@ const FishSearch: React.FC<{
   };
 
   const ascHandler = () => {
+    setClassAsc("btn-filter");
+    setClassDesc("");
     setSortKey("ASC");
   };
   const descHandler = () => {
+    setClassAsc("");
+    setClassDesc("btn-filter");
     setSortKey("DESC");
   };
 
@@ -46,22 +54,35 @@ const FishSearch: React.FC<{
   };
 
   const searchChangeHandler = (event: any) => {
-    setEnteredSearch(event.target.value);
+    let txtSearch = event.target.value;
+    if (!txtSearch) {
+      clearFormatHandler();
+    }
+    setEnteredSearch(txtSearch);
+  };
+
+  const clearFormatHandler = () => {
+    setClassAsc("");
+    setClassDesc("");
+    setFilterBy("");
+    setSortKey("");
+    setEnteredSearch("");
   };
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("SEARCH!");
+      // console.log("SEARCH!");
       props.onSearch(enteredSearch);
     }, 500);
 
     return () => {
-      console.log("CLEANUP");
+      // console.log("CLEANUP");
       clearTimeout(identifier);
     };
   }, [enteredSearch]);
 
   useEffect(() => {
+    // console.log("FILTER!");
     props.onFilter(sortKey, filterBy);
   }, [sortKey, filterBy]);
 
@@ -69,13 +90,7 @@ const FishSearch: React.FC<{
     marginRight: "1rem",
     width: "10rem",
   };
-  const listDropdown: Select[] = [
-    { label: "Komoditas", value: "komoditas" },
-    { label: "City", value: "area_kota" },
-    { label: "Province", value: "area_provinsi" },
-    { label: "Size", value: "size" },
-    { label: "Price", value: "price" },
-  ];
+  const listDropdown: Select[] = FilterDropdown;
 
   return (
     <Fragment>
@@ -94,10 +109,13 @@ const FishSearch: React.FC<{
                 placeholder="FilterBy ..."
                 onChange={onChangeFilterByHandler}
               />
-              <Button onClick={ascHandler}>{<SortAscendingOutlined />}</Button>
-              <Button onClick={descHandler}>
+              <Button class={classAsc} onClick={ascHandler}>
+                {<SortAscendingOutlined />}
+              </Button>
+              <Button class={classDesc} onClick={descHandler}>
                 {<SortDescendingOutlined />}
               </Button>
+              <Button onClick={clearFormatHandler}>{<ClearOutlined />}</Button>
             </div>
             <div className="search-input">
               <input

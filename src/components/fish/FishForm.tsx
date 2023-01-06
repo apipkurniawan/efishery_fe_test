@@ -56,7 +56,7 @@ const FishForm: React.FC<{
     if (!props.selectedData) {
       await store.append("list", [data]).then(
         (res: any) => {
-          console.log("SAVE FISH : ", res);
+          // console.log("SAVE FISH : ", res);
         },
         (error: Error) => {
           console.log("ERROR : ", error);
@@ -70,7 +70,7 @@ const FishForm: React.FC<{
         })
         .then(
           (res: any) => {
-            console.log("UPDATE FISH : ", res);
+            // console.log("UPDATE FISH : ", res);
           },
           (error: Error) => {
             console.log("ERROR : ", error);
@@ -98,7 +98,7 @@ const FishForm: React.FC<{
   };
 
   useEffect(() => {
-    console.log("FISH FORM!");
+    // console.log("FISH FORM!");
     if (props.selectedData) {
       setEnteredKomoditas(props.selectedData.komoditas);
       setEnteredPrice(props.selectedData.price);
@@ -111,7 +111,7 @@ const FishForm: React.FC<{
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log("VALIDITY");
+      // console.log("VALIDITY");
       setFormIsValid(
         enteredKomoditas.trim().length > 0 &&
           enteredCity.trim().length > 0 &&
@@ -122,7 +122,7 @@ const FishForm: React.FC<{
     }, 500);
 
     return () => {
-      console.log("CLEANUP VALIDITY");
+      // console.log("CLEANUP VALIDITY");
       clearTimeout(identifier);
     };
   }, [enteredCity, enteredKomoditas, enteredPrice, enteredProv, enteredSize]);
@@ -190,6 +190,9 @@ const FishForm: React.FC<{
             disabled={!formIsValid || loading}
           >
             {loading ? "Loading..." : "Submit"}
+          </button>
+          <button type="button" className="btn" onClick={props.onClose}>
+            Close
           </button>
         </div>
       </form>
