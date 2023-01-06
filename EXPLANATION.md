@@ -6,11 +6,14 @@
 
 #### fitur
 
-- **Search** : Mempermudah dalam pencarian komoditas ikan dari seluruh daerah
+- **List** : Data yang ditampilkan mulai dari data yg baru ditambahkan, Unique (tidak ada uuid yg sama) dan tidak null
+- **Search** : Mempermudah dalam pencarian komoditas ikan dari seluruh daerah dengan cukup menginput keyword di field input search
 - **Add** : Menambah data
-- **Edit** : Mengubah data
-- **Delete** : Menghapus data
-- **Sort** : Mengurutkan data dari A-Z atau Z-A
+- **icon Edit** : Mengubah data
+- **icon Delete** : Menghapus data
+- **icon Asc** : Mengurutkan data dari A-Z berdasarkan kolom yang dipilih pada dropdwon filterBy
+- **icon Desc** : Mengurutkan data dari Z-A berdasarkan kolom yang dipilih pada dropdwon filterBy
+- **icon Clear** : Menghapus format filter
 
 #### component
 
