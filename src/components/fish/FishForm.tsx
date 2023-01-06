@@ -7,6 +7,10 @@ import { Select } from "../../models/select";
 import "./FishForm.scss";
 import { Area } from "../../models/area";
 import FishModel from "../../models/fish";
+import { BASE_API_URL } from "../../config/base-url";
+import SteinStore from "stein-js-client";
+
+const store = new SteinStore(BASE_API_URL);
 
 const FishForm: React.FC<{
   onClose: () => void;
@@ -19,6 +23,7 @@ const FishForm: React.FC<{
   const [enteredSize, setEnteredSize] = useState("");
   const [enteredPrice, setEnteredPrice] = useState("");
   const [formIsValid, setFormIsValid] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState<Select[]>([]);
   const fishCtx = useContext(FishContext);
 
@@ -33,8 +38,9 @@ const FishForm: React.FC<{
     setCities(selectCities);
   };
 
-  const submitHandler = (e: any) => {
+  const submitHandler = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     let data = new FishModel(
       props.selectedData
         ? props.selectedData.uuid
@@ -48,10 +54,30 @@ const FishForm: React.FC<{
       new Date().getTime().toString()
     );
     if (!props.selectedData) {
-      fishCtx.saveFishes(data);
+      await store.append("list", [data]).then(
+        (res: any) => {
+          console.log("SAVE FISH : ", res);
+        },
+        (error: Error) => {
+          console.log("ERROR : ", error);
+        }
+      );
     } else {
-      fishCtx.editFishes(data);
+      await store
+        .edit("list", {
+          search: { uuid: data.uuid },
+          set: data,
+        })
+        .then(
+          (res: any) => {
+            console.log("UPDATE FISH : ", res);
+          },
+          (error: Error) => {
+            console.log("ERROR : ", error);
+          }
+        );
     }
+    setLoading(false);
     props.onSave();
   };
 
@@ -158,8 +184,12 @@ const FishForm: React.FC<{
           />
         </div>
         <div className="actions">
-          <button type="submit" className="btn" disabled={!formIsValid}>
-            Submit
+          <button
+            type="submit"
+            className="btn"
+            disabled={!formIsValid || loading}
+          >
+            {loading ? "Loading..." : "Submit"}
           </button>
         </div>
       </form>

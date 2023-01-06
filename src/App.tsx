@@ -35,6 +35,7 @@ function App() {
         const array: any = FilterFish(sortedarray);
         const unique = Unique(array, "uuid");
         fishCtx.addFishes(unique);
+        console.log("FISHES : ", unique);
         setFishes(unique);
         setLoading(false);
       },

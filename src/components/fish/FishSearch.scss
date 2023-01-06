@@ -41,3 +41,21 @@ input:focus {
     margin-bottom: 0.5rem;
   }
 }
+
+@media (max-width: 986px) {
+  input {
+    width: 25rem;
+  }
+}
+
+@media (max-width: 896px) {
+  input {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 806px) {
+  input {
+    width: 17rem;
+  }
+}
