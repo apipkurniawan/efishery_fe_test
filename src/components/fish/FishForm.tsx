@@ -42,8 +42,8 @@ const FishForm: React.FC<{
       enteredKomoditas,
       enteredProv,
       enteredCity,
-      enteredPrice,
       enteredSize,
+      enteredPrice,
       new Date().toISOString(),
       new Date().getTime().toString()
     );

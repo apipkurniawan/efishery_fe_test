@@ -27,7 +27,12 @@ function App() {
     store.read("list").then(
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
-        const array: any = FilterFish(data);
+        const sortedarray: any = SortObject(
+          FilterFish(data),
+          "tgl_parsed",
+          "DESC"
+        );
+        const array: any = FilterFish(sortedarray);
         const unique = Unique(array, "uuid");
         fishCtx.addFishes(unique);
         setFishes(unique);
@@ -87,12 +92,8 @@ function App() {
   };
 
   const filterHandler = (sortkey: string, filterBy: string) => {
-    console.log("filterBy", filterBy);
-    console.log("sortkey", sortkey);
     if (sortkey && filterBy) {
       const sortedFishes = SortObject(fishes, filterBy, sortkey);
-      console.log("sortedFishes", sortedFishes);
-      // fishCtx.addFishes(sortedFishes);
       const fishTmp = [...sortedFishes];
       setFishes(fishTmp);
     }
