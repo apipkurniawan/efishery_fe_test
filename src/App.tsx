@@ -23,10 +23,12 @@ import { Sort } from "./constants/sort.enum";
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const fishCtx = useContext(FishContext);
 
   const getFishHandler = () => {
     setLoading(true);
+    setIsError(false);
     getFishService().then(
       (data: FishModel[]) => {
         console.log("GET FISH : ", data);
@@ -44,6 +46,7 @@ function App() {
       },
       (error: Error) => {
         console.log("ERROR : ", error);
+        setIsError(true);
         setLoading(false);
       }
     );
@@ -139,7 +142,7 @@ function App() {
       <main>
         <FishThumbnail />
         {loading && (
-          <div className="loading">
+          <div className="center">
             <p>Loading ...</p>
           </div>
         )}
@@ -150,11 +153,18 @@ function App() {
               onFilter={filterHandler}
               onSearch={searchHandler}
             />
-            <Fishes
-              items={fishes}
-              onSave={getFishHandler}
-              onDelete={deleteHandler}
-            />
+            {isError && (
+              <div className="center no-found">
+                <p>No Found Data ...</p>
+              </div>
+            )}
+            {!isError && (
+              <Fishes
+                items={fishes}
+                onSave={getFishHandler}
+                onDelete={deleteHandler}
+              />
+            )}
           </>
         )}
       </main>
