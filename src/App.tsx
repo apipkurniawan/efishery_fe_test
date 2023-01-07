@@ -1,7 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { FloatButton } from "antd";
-import SteinStore from "stein-js-client";
-import { BASE_API_URL } from "./config/base-url";
 import { FilterArea, FilterFish, FilterSize } from "./utils/filter-list";
 import Fishes from "./components/fish/Fish";
 import Header from "./components/layout/Header";
@@ -14,8 +12,12 @@ import "./App.scss";
 import { SortNumber, SortObject } from "./utils/sort-list";
 import { FishContext } from "./store/fish-context";
 import { Unique } from "./utils/unique-list";
-
-const store = new SteinStore(BASE_API_URL);
+import {
+  deleteFishService,
+  getAreaService,
+  getFishService,
+  getSizeService,
+} from "./services/fish-service";
 
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
@@ -24,18 +26,18 @@ function App() {
 
   const getFishHandler = () => {
     setLoading(true);
-    store.read("list").then(
+    getFishService().then(
       (data: FishModel[]) => {
-        // console.log("GET FISH : ", data);
+        console.log("GET FISH : ", data);
         const sortedarray: any = SortObject(
           FilterFish(data),
           "tgl_parsed",
           "DESC"
         );
-        const array: any = FilterFish(sortedarray);
-        const unique = Unique(array, "uuid");
+        console.log("SORTED FISH : ", sortedarray);
+        const unique = Unique(sortedarray, "uuid");
         fishCtx.addFishes(unique);
-        // console.log("FISHES : ", unique);
+        console.log("UNIQUE FISHES : ", unique);
         setFishes(unique);
         setLoading(false);
       },
@@ -47,7 +49,7 @@ function App() {
   };
 
   const getAreaHandler = () => {
-    store.read("option_area").then(
+    getAreaService().then(
       (data: Area[]) => {
         // console.log("GET AREA : ", FilterArea(data));
         fishCtx.addAreas(FilterArea(data));
@@ -59,7 +61,7 @@ function App() {
   };
 
   const getSizeHandler = () => {
-    store.read("option_size").then(
+    getSizeService().then(
       (data: Size[]) => {
         const filteredData = FilterSize(data);
         let sizeNum: number[] = [];
@@ -82,14 +84,10 @@ function App() {
 
   const deleteHandler = (id: string) => {
     setLoading(true);
-    store
-      .delete("list", {
-        search: { uuid: id },
-      })
-      .then((res: Error) => {
-        // console.log("DELETE : ", res);
-        getFishHandler();
-      });
+    deleteFishService(id).then((res: Error) => {
+      // console.log("DELETE : ", res);
+      getFishHandler();
+    });
   };
 
   const filterHandler = (sortkey: string, filterBy: string) => {

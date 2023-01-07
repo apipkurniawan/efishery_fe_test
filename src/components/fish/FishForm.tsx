@@ -7,10 +7,7 @@ import { Select } from "../../models/select";
 import "./FishForm.scss";
 import { Area } from "../../models/area";
 import FishModel from "../../models/fish";
-import { BASE_API_URL } from "../../config/base-url";
-import SteinStore from "stein-js-client";
-
-const store = new SteinStore(BASE_API_URL);
+import { editFishService, saveFishService } from "../../services/fish-service";
 
 const FishForm: React.FC<{
   onClose: () => void;
@@ -41,41 +38,38 @@ const FishForm: React.FC<{
   const submitHandler = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    let data = new FishModel(
-      props.selectedData
+    let data: FishModel = {
+      area_kota: enteredCity,
+      area_provinsi: enteredProv,
+      komoditas: enteredKomoditas,
+      price: enteredPrice,
+      size: enteredSize,
+      tgl_parsed: new Date().toISOString(),
+      timestamp: new Date().getTime().toString(),
+      uuid: props.selectedData
         ? props.selectedData.uuid
         : `${new Date().getTime().toString()}${Math.random()}`,
-      enteredKomoditas,
-      enteredProv,
-      enteredCity,
-      enteredSize,
-      enteredPrice,
-      new Date().toISOString(),
-      new Date().getTime().toString()
-    );
+    };
     if (!props.selectedData) {
-      await store.append("list", [data]).then(
+      console.log("SAVE BODY : ", data);
+      await saveFishService(data).then(
         (res: any) => {
-          // console.log("SAVE FISH : ", res);
+          console.log("SAVE FISH : ", res);
         },
         (error: Error) => {
           console.log("ERROR : ", error);
         }
       );
     } else {
-      await store
-        .edit("list", {
-          search: { uuid: data.uuid },
-          set: data,
-        })
-        .then(
-          (res: any) => {
-            // console.log("UPDATE FISH : ", res);
-          },
-          (error: Error) => {
-            console.log("ERROR : ", error);
-          }
-        );
+      console.log("EDIT BODY : ", data);
+      await editFishService(data).then(
+        (res: any) => {
+          console.log("UPDATE FISH : ", res);
+        },
+        (error: Error) => {
+          console.log("ERROR : ", error);
+        }
+      );
     }
     setLoading(false);
     props.onSave();

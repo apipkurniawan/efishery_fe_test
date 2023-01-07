@@ -1,31 +1,31 @@
 class FishModel {
-  uuid: string;
-  komoditas: string;
-  area_provinsi: string;
   area_kota: string;
-  size: string;
+  area_provinsi: string;
+  komoditas: string;
   price: string;
+  size: string;
   tgl_parsed: string;
   timestamp: string;
+  uuid: string;
 
   constructor(
-    uuid: string,
-    komoditas: string,
-    prov: string,
     city: string,
-    size: string,
+    prov: string,
+    komoditas: string,
     price: string,
+    size: string,
     date: string,
-    timestamp: string
+    timestamp: string,
+    uuid: string
   ) {
-    this.uuid = uuid;
-    this.komoditas = komoditas;
-    this.area_provinsi = prov;
     this.area_kota = city;
-    this.size = size;
+    this.area_provinsi = prov;
+    this.komoditas = komoditas;
     this.price = price;
+    this.size = size;
     this.tgl_parsed = date;
     this.timestamp = timestamp;
+    this.uuid = uuid;
   }
 }
 
