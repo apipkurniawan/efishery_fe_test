@@ -6,18 +6,18 @@ import { Size } from "../models/size";
 import _ from "lodash";
 
 type FishObj = {
-  sizes: Select[];
+  selectSizes: Select[];
   fishes: FishModel[];
-  areas: Select[];
+  selectAreas: Select[];
   addSizes: (sizes: Size[]) => void;
   addFishes: (fishes: FishModel[]) => void;
   addAreas: (areas: Area[]) => void;
 };
 
 export const FishContext = React.createContext<FishObj>({
-  sizes: [],
+  selectSizes: [],
   fishes: [],
-  areas: [],
+  selectAreas: [],
   addSizes: (sizes: Size[]) => {},
   addFishes: (fishes: FishModel[]) => {},
   addAreas: (areas: Area[]) => {},
@@ -60,9 +60,9 @@ const FishContextProvider = (props: Props) => {
   };
 
   const contextValue: FishObj = {
-    sizes: sizes,
+    selectSizes: sizes,
     fishes: fishes,
-    areas: areas,
+    selectAreas: areas,
     addSizes: addSizes,
     addFishes: addFishes,
     addAreas: addAreas,

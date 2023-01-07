@@ -122,6 +122,7 @@ const FishSearch: React.FC<{
                 type="text"
                 placeholder="search ..."
                 value={enteredSearch}
+                className="input-search"
                 onChange={searchChangeHandler}
               />
             </div>

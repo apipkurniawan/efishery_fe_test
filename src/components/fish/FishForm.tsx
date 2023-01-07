@@ -27,7 +27,9 @@ const FishForm: React.FC<{
   const onChangeProvHandler = (data: any) => {
     const selectedProv = typeof data === "string" ? data : data.target.value;
     setEnteredProv(selectedProv);
-    const filteredArea = fishCtx.areas.filter((v) => v.label === selectedProv);
+    const filteredArea = fishCtx.selectAreas.filter(
+      (v) => v.label === selectedProv
+    );
     let selectCities: Select[] = [];
     filteredArea[0].item.cities.forEach((el: Area) => {
       selectCities.push({ label: el.city, value: el.city, item: el });
@@ -121,7 +123,7 @@ const FishForm: React.FC<{
     };
   }, [enteredCity, enteredKomoditas, enteredPrice, enteredProv, enteredSize]);
 
-  const widthDropdown = { width: "14.5rem" };
+  const widthDropdown = { width: "12.5rem" };
 
   return (
     <Modal onClose={props.onClose}>
@@ -140,7 +142,7 @@ const FishForm: React.FC<{
           <Dropdown
             style={widthDropdown}
             name="prov"
-            value={fishCtx.areas}
+            value={fishCtx.selectAreas}
             selected={enteredProv}
             onChange={onChangeProvHandler}
             placeholder="Choose prov ..."
@@ -164,14 +166,14 @@ const FishForm: React.FC<{
             name="size"
             selected={enteredSize}
             onChange={onChangeSizeHandler}
-            value={fishCtx.sizes}
+            value={fishCtx.selectSizes}
             placeholder="Choose size ..."
           />
         </div>
         <div className={`control ${false ? "invalid" : ""}`}>
           <label htmlFor="price">Price</label>
           <input
-            type="text"
+            type="number"
             id="price"
             value={enteredPrice}
             onChange={onChangePriceHandler}

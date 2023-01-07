@@ -16,9 +16,11 @@ const FishItem: React.FC<{
     <li className="fish">
       <div>
         <h3>{props.item.komoditas}</h3>
-        <div className="size">Size : {props.item.size}</div>
-        <div className="description">
-          {props.item.area_kota}, {props.item.area_provinsi}
+        <div>
+          <span className="size">size : {props.item.size}</span>
+          <span className="description">
+            {props.item.area_kota}, {props.item.area_provinsi}
+          </span>
         </div>
         <div className="price">
           {CurrencyFormat(parseFloat(props.item.price))}
