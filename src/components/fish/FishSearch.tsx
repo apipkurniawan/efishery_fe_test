@@ -12,6 +12,7 @@ import Dropdown from "../UI/Dropdown";
 import Button from "../UI/Button";
 import { Select } from "../../models/select";
 import { FilterDropdown } from "../../constants/filter-dropdown";
+import { Sort } from "../../constants/sort.enum";
 
 const FishSearch: React.FC<{
   onSearch: (txt: string) => void;
@@ -41,12 +42,12 @@ const FishSearch: React.FC<{
   const ascHandler = () => {
     setClassAsc("btn-filter");
     setClassDesc("");
-    setSortKey("ASC");
+    setSortKey(Sort.ASC);
   };
   const descHandler = () => {
     setClassAsc("");
     setClassDesc("btn-filter");
-    setSortKey("DESC");
+    setSortKey(Sort.DESC);
   };
 
   const onChangeFilterByHandler = (event: any) => {

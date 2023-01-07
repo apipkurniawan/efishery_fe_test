@@ -18,6 +18,7 @@ import {
   getFishService,
   getSizeService,
 } from "./services/fish-service";
+import { Sort } from "./constants/sort.enum";
 
 function App() {
   const [fishes, setFishes] = useState<FishModel[]>([]);
@@ -32,7 +33,7 @@ function App() {
         const sortedarray: any = SortObject(
           FilterFish(data),
           "tgl_parsed",
-          "DESC"
+          Sort.DESC
         );
         console.log("SORTED FISH : ", sortedarray);
         const unique = Unique(sortedarray, "uuid");
