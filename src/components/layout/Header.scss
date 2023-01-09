@@ -29,3 +29,14 @@
   object-fit: cover;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
+
+@media (orientation: portrait) {
+  .header h1 {
+    font-size: 27px;
+  }
+
+  .main-image img {
+    width: 120%;
+    transform: rotateZ(-13deg) translateY(-6rem) translateX(-2rem);
+  }
+}
