@@ -1,3 +1,6 @@
+@use "../../assets/sass/borders";
+$primary-color: #8a2b06;
+
 .actions {
   text-align: center;
 }
@@ -6,7 +9,7 @@
   font: inherit;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #8a2b06;
+  @include borders.border-primary;
   padding: 0.5rem 2rem;
   border-radius: 25px;
 }
@@ -19,12 +22,12 @@
 }
 
 .actions .button-no {
-  color: #8a2b06;
+  color: $primary-color;
   margin-left: 0.5rem;
 }
 
 .actions .button {
-  background-color: #8a2b06;
+  background-color: $primary-color;
   color: white;
 }
 

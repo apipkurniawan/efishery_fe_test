@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import foodImage from "../../assets/fish2.jpg";
+import foodImage from "../../assets/img/fish2.jpg";
 import "./Header.scss";
 
 const Header = () => {

@@ -1,7 +1,9 @@
+@use "../../assets/sass/borders";
+
 .dropdown {
   height: 2.2rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  @include borders.border-secondary;
   font: inherit;
   padding-left: 0.5rem;
 }

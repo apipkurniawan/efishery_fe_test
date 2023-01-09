@@ -1,8 +1,12 @@
+@use "../../assets/sass/background-color";
+@use "../../assets/sass/borders";
+$primary-color: #8a2b06;
+
 .button {
   font: inherit;
   cursor: pointer;
-  background-color: #8a2b06;
-  border: 1px solid #8a2b06;
+  @include background-color.background-color;
+  @include borders.border-primary;
   color: white;
   padding: 0.3rem 0.7rem;
   border-radius: 20px;
