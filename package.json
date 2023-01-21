@@ -2,6 +2,7 @@
   "name": "efishery_fe_test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://apip.fun/react-app",
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
     "@testing-library/jest-dom": "^5.16.5",
